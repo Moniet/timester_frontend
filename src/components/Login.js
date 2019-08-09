@@ -44,16 +44,17 @@ const Form = styled('form')`
     }
 
     input {
-        border: solid 2px white;
-        border-radius: 10px;
-        background: rgba(255,255,255,0.25);
+        font-size: 0.75em;
+        text-align: center;
+        letter-spacing: 2px;
         width: 100%;
         padding: 0.75rem;
         margin-bottom: 2rem;
+        border: solid 2px white;
+        border-radius: 10px;
+        outline: none;
+        background: rgba(255,255,255,0.25);
         box-shadow: ${styles.shadow};
-        letter-spacing: 2px;
-        font-size: 0.75em;
-        text-align: center;
     }
 
     span {

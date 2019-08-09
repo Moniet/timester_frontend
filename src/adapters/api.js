@@ -31,7 +31,17 @@ const registerUser = (user) => {
     }).then(res => res.json())
 }
 
+const getTasks = (token) => {
+    return fetch(`http://localhost:3000/tasks`, {
+     method: 'GET',
+     headers: {
+       Authorization: `Bearer ${token}`
+     }
+   }).then(res => res.json())
+ }
+
 export default {
     login,
-    registerUser
+    registerUser,
+    getTasks
 }
