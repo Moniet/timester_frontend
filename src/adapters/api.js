@@ -15,7 +15,7 @@ const login = (user) => {
     }).then(res => res.json())
 }
 
-export const createUser = (user) => {
+const registerUser = (user) => {
     return fetch(`${baseUrl}/register`, {
       method: 'POST',
       headers: {
@@ -32,5 +32,6 @@ export const createUser = (user) => {
 }
 
 export default {
-    login
+    login,
+    registerUser
 }

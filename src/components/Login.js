@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
-import Layout from './Layout'
 import { colors, mq, styles } from '../styles/theme'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+
+import Layout from './Layout'
+import login from '../actions/loginActions';
+import register from '../actions/registerActions';
 
 const Container = styled('div')`
     display: flex;
@@ -49,6 +53,7 @@ const Form = styled('form')`
         box-shadow: ${styles.shadow};
         letter-spacing: 2px;
         font-size: 0.75em;
+        text-align: center;
     }
 
     span {
@@ -74,7 +79,7 @@ const Button = styled('button')`
     ${mq[1]} { width: 50%; }
 `
 
-const Login = () => {
+const Login = (props) => {
 
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
@@ -89,15 +94,27 @@ const Login = () => {
         setPassword(e.target.value)
     }
 
+    const handleNameChange = e => {
+        setName(e.target.value)
+    }
+
     const handleClick = () => {
-        setRegisterPage(true)
+        setRegisterPage(!registerPage)
+    }
+
+    const handleSubmit = e => {
+        e.preventDefault()
+        if (!registerPage) 
+            props.login({ username: username, password: password })
+        else 
+            props.register({ name: name, username: username, password: password })
     }
 
     const nameInput = () => {
-        if (registerPage) { 
+        if (!!registerPage) { 
            return ( 
                 <>
-                    <label>name</label> 
+                    <label>Name</label> 
                     <input type='text' data-type='name' onChange={(e) => handleUsernameChange(e)} /> 
                 </>
             )
@@ -106,21 +123,28 @@ const Login = () => {
 
     return (
         <Container>
-            <img src={require('../assets/img/form-memphis-design-top.svg')} />
-            <Form role="form">
+            <img src={require('../assets/img/form-memphis-design-top.svg')} alt=""/>
+            <Form role="form" onSubmit={ handleSubmit }>
                 { nameInput() }
-                <label>Password</label>
+                <label>Username</label>
                 <input type='text' data-type='username' onChange={(e) => handleUsernameChange(e)} />
 
                 <label>Password</label>
                 <input type='password' date-type='password' onChange={(e) => handlePasswordChange(e)} />
 
                 <span onClick={() => handleClick()}>Register</span>
-                <Button>Login</Button>
+                <Button>{registerPage ? 'Register' : 'Login'}</Button>
             </Form>
-            <img src={require('../assets/img/form-memphis-design-bottom.svg')} />
+            <img src={require('../assets/img/form-memphis-design-bottom.svg')} alt="" />
         </Container>
     )
 }
 
-export default Login
+const mapDispatchToProps = dispatch => {
+    return {
+        login: user => dispatch(login(user)),
+        register: user => dispatch(register(user))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login);
