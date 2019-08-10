@@ -10,24 +10,21 @@ import Home from './components/Home'
 import Login from './components/Login'
 import { setToken } from './actions/tokenActions'
 
-
-
 const App = ({ setTokenState, token }) => {
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    setTokenState(token)
+    setTokenState(localStorage.getItem('token'))
   }, []);
 
   // update state with the token
   // get state and map to props, pass down props to Home 
-    return (
-      <Router>
-        <Layout>
-          <Route exact path="/" render={ () => <Home token={ token } /> } />
-          <Route exact path="/Login" component={ Login } />
-        </Layout>
-      </Router>
-    );
+  return (
+    <Router>
+      <Layout>
+        <Route exact path="/" render={ () => <Home token={ token } /> } />
+        <Route exact path="/Login" component={ Login } />
+      </Layout>
+    </Router>
+  );
 }
 
 const mapStateToProps = (state) => {
