@@ -1,7 +1,5 @@
 import api from '../adapters/api'
 
-const token = localStorage.getItem('token')
-
 const loadHome = (token, tasks, goals) => {
     return { 
         type: 'LOAD_HOME',
@@ -20,14 +18,18 @@ const loadLogin = (token, tasks, goals) => {
 export const home = () => {
     let tasks;
     let goals;
+    let token = localStorage.getItem('token')
 
     return function (dispatch) {
-        if (token && token !== '') {
-            api.getTasks(data => {
-                tasks = data['data']['relationships']['tasks']['data']
-                goals = data['data']['relationships']['goals']['data']
-                dispatch(loadHome(token, tasks, goals))
-            });
+        if (token) {
+            api.getTasks(token)
+                .then(data => {
+                    tasks = data['data']['relationships']['tasks']['data']
+                    goals = data['data']['relationships']['goals']['data']
+                    dispatch(loadHome(token, tasks, goals))
+                })
+                console.log(`token in home action is ${token}`);
+                
         } else {
             dispatch(loadLogin)
         }

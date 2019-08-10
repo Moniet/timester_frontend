@@ -1,17 +1,17 @@
 const initState = { 
-    token: null,
+    token: localStorage.getItem('token'),
     tasks: [],
     goals: []
 }
 
 const homeReducer = (state = initState, action) => {
+    const token = action.token;
     switch (action.type) {
         case 'LOAD_HOME':
+            console.log(action)
             return {
                 ...state,
-                token: action.token,
-                tasks: action.tasks,
-                goals: action.goals
+                token
             }
         case 'LOAD_LOGIN':
             return {

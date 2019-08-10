@@ -1,17 +1,15 @@
-import api from '../../adapters/api'
-
 const initState = {};
 
-const loginReducer = (state = initState, action) => {
+const tokenReducer = (state = initState, action) => {
     switch (action.type) {
         case 'SET_TOKEN':
-            return {
+            return  {
                 ...state,
                 token: action.token
             }
         default:
-            return state;
+            return state
     }
 }
 
-export default loginReducer
+export default tokenReducer
