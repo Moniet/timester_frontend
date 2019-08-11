@@ -1,25 +1,23 @@
 import api from '../adapters/api'
+import moment from 'moment'
 
-const loadDashboard= (token, tasks, goals) => {
+const loadDashboard= (tasks, goals) => {
     return { 
         type: 'LOAD_DASHBOARD',
-        token,
         goals,
         tasks
     }
 }
 
 export const dashboardAction = token => {
-    let tasks;
-    let goals;
-
     return function (dispatch) {
         api.getTasks(token)
             .then(data => {
-                tasks = data['tasks']['data']['relationships']['tasks']['data']
-                goals = data['tasks']['data']['relationships']['goals']['data']
-                dispatch(loadDashboard(token, tasks, goals))
-                
+                const { tasks, goals  } = data
+                dispatch(loadDashboard(tasks.data, goals.data))
+                // let date = data.tasks.data[0].attributes.start_time
+                // // let d = moment(date)
+                // let d = new Date(date)
             })
             
     }

@@ -1,21 +1,20 @@
 const initState = { 
-    token: localStorage.getItem('token'),
     tasks: [],
     goals: []
 }
 
-const homeReducer = (state = initState, action) => {
-    const token = action.token;
+const dashboardReducer = (state = initState, action) => {
     switch (action.type) {
         case 'LOAD_DASHBOARD':
-            console.log(action)
+            const { tasks, goals } = action
             return {
                 ...state,
-                token
+                tasks,
+                goals
             }
         default:
             return state
     }
 }
 
-export default homeReducer
+export default dashboardReducer

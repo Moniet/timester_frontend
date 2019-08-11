@@ -5,7 +5,7 @@ import tokenReducer from './tokenReducer'
 
 const rootReducer = combineReducers({
     login: loginReducer,
-    dashboard: dashboardReducer,
+    userData: dashboardReducer,
     token: tokenReducer
 })
 

@@ -9,6 +9,10 @@ body {
   letter-spacing: 1px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -16,4 +20,9 @@ code {
 
 a {
   text-decoration: none;
+}
+
+.banner-header {
+  font-weight: bold;
+  font-size: 4rem;
 }

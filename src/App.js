@@ -1,13 +1,13 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-
 import logo from './logo.svg'
 import './App.css'
 import Layout from './components/Layout'
 import Home from './components/Home'
 import Login from './components/Login'
+import TaskPage from './components/TaskPage'
 import { setToken } from './actions/tokenActions'
 
 const App = ({ setTokenState, token }) => {
@@ -22,6 +22,7 @@ const App = ({ setTokenState, token }) => {
       <Layout>
         <Route exact path="/" render={ () => <Home token={ token } /> } />
         <Route exact path="/Login" component={ Login } />
+        <Route path="/tasks/:date" component={TaskPage} />
       </Layout>
     </Router>
   );
@@ -39,6 +40,5 @@ const mapDispatchToProps = dispatch => {
     setTokenState: token => dispatch(setToken(token))
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
