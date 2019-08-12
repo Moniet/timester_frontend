@@ -40,6 +40,23 @@ const getTasks = (token) => {
    }).then(res => res.json())
  }
 
+ const createTasks = (token, task, goals) => {
+  fetch(`http://localhost:3000/tasks`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      user: {
+        task: task,
+        goals: goals
+      }
+    })
+ }).then(res => res.json())
+}
+
 export default {
     login,
     registerUser,

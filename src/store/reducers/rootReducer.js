@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import loginReducer from './loginReducer'
-import dashboardReducer from './dashboardReducer'
+import userDataReducer from './userDataReducer'
 import tokenReducer from './tokenReducer'
 
 const rootReducer = combineReducers({
     login: loginReducer,
-    userData: dashboardReducer,
+    userData: userDataReducer,
     token: tokenReducer
 })
 

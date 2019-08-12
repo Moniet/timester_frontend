@@ -3,9 +3,9 @@ const initState = {
     goals: []
 }
 
-const dashboardReducer = (state = initState, action) => {
+const userDataReducer = (state = initState, action) => {
     switch (action.type) {
-        case 'LOAD_DASHBOARD':
+        case 'LOAD_USER_DATA':
             const { tasks, goals } = action
             return {
                 ...state,
@@ -17,4 +17,4 @@ const dashboardReducer = (state = initState, action) => {
     }
 }
 
-export default dashboardReducer
+export default userDataReducer

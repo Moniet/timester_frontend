@@ -2,20 +2,27 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { css, Global } from '@emotion/core'
 import styled from '@emotion/styled'
-import {dashboardAction} from '../actions/dashboardActions'
+import { userData } from '../actions/userDataActions'
 import { colors, mq } from '../styles/theme'
 import TaskGrid from '../components/TaskGrid'
 import Container from '../components/Container'
+import MenuButton from './MenuButton'
+import TaskMenu from './TaskMenu'
 
 const Banner = styled.div`
     position: relative;
     width: 100%;
+    height: 100%;
     background: linear-gradient(30deg, ${colors.primary}, ${colors.secondary}, ${colors.tertiary});
 
     ${mq[0]} {
-        height: 45%;
         clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
     }
+`
+
+const BannerContainer = styled.div`
+    width: 100%;
+    height: 45%;
 `
 
 const BannerHeader = styled.h1`
@@ -26,19 +33,35 @@ const BannerHeader = styled.h1`
 `
 
 const Dashboard = ({ loadUserData, token, tasks, goals }) => {
+    const menu = React.createRef()
+
     useEffect(() => {
         if (token && tasks.length === 0) {
             loadUserData(token)
         }
+        menu.current.style.opacity = 0
     })
+
+    const showMenu = () => {
+        let op = menu.current.style.opacity
+        if (op === 0) {
+            op = 1
+        } else {
+            op = 0
+        }
+    }
     
 
     return (
         <Container>
-            <Banner>
-                <BannerHeader className="banner-header">Home</BannerHeader>
-            </Banner>
-            <TaskGrid tasks={tasks} />
+            <BannerContainer>
+                <Banner>
+                    <BannerHeader className="banner-header">Home</BannerHeader>
+                </Banner>
+                <MenuButton showMenu={ showMenu }/>
+            </BannerContainer>
+            <TaskMenu ref={ menu } />
+            <TaskGrid tasks={ tasks } />
         </Container>
     )
 }
@@ -54,7 +77,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadUserData: token => dispatch(dashboardAction(token))
+        loadUserData: token => dispatch(userData(token))
     }
 }
 

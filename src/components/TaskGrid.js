@@ -11,13 +11,17 @@ import { formatToHours, readableDate } from '../utils/dateUtils'
 const gridSize = 25;
 
 const DateHeader = styled.h2`
-    color: ${colors.primary};
+    a { 
+        color: ${colors.primary}; 
+        cursor: pointer;
+    }
     margin-top: 2em;
     margin-left: 0.25em;
     grid-column: span 2;
     grid-row-end: span 2;
     align-self: flex-start;
     font-weight: 500;
+    cursor: pointer;
 `
 
 const TaskGrid = ({ tasks }) => {
@@ -29,14 +33,12 @@ const TaskGrid = ({ tasks }) => {
             let allTasks = tasks.filter(tasks => tasks.attributes.date === date)
             return (
                 <> 
-
                     <DateHeader key={ Math.random() }>
                         <Link to={`/tasks/${date}`} >
                             { readableDate(date) }
                         </Link>
                     </DateHeader>
-                    { allTasks.map(task => <Task task={ task } gridSize={ gridSize }key={ task.id } />)}
-                        
+                    { allTasks.map(task => <Task task={ task } gridSize={ gridSize } key={ task.id } />) }
                 </>
             )
         })
