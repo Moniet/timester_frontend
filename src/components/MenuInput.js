@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import React from 'react'
+import React, { useState } from 'react'
 
 const input = css`
     border: none;
@@ -12,9 +12,10 @@ const input = css`
     outline: none;
 `
 
-const MenuInput = () => {
+const MenuInput = ({ setValue }) => {
+
     return (
-        <input type="text" css={input} />
+        <input type="text" css={input} onChange={e => setValue(e.target.value)}/>
     )
 }
 

@@ -6,6 +6,7 @@ import { colors, styles } from '../styles/theme'
 import { connect } from 'react-redux'
 import { userData } from '../actions/userDataActions'
 import api from '../adapters/api'
+import { TweenLite } from "gsap/TweenMax"
 
 const Container = styled.div`
     position: absolute;
@@ -17,6 +18,8 @@ const Container = styled.div`
     top: 0;
     display: flex;
     justify-content: center;
+    opacity: 0;
+    transform: translateY(-100%);
 `
 
 const ItemsContainer = styled.div`
@@ -58,31 +61,52 @@ const ButtonContainer = styled.div`
     cursor: pointer;
 `
 
-const TaskMenu = ({ token, getTasks }) => {
+const TaskMenu = ({ token, getTasks, menuToggled }) => {
     const [goalNumber, setGoalNum] = useState(1)
-    const [startTime, setStartTime] = useState('')
-
+    const [task, setTask] = useState({})
+    const [goals, setGoals] = useState([])
+    
     useEffect(() => {
-        console.log(startTime)
-    })
+        const el = document.querySelector('.menu-container')
+        if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
+        if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
+    }, [task, goals, goalNumber, menuToggled])
 
-    const addGoal = () => {
+    const newGoalItem = () => {
         setGoalNum(goalNumber + 1)
     }
 
     const handleSubmit = () => {
-        console.log()
+        api.createTasks(token, task, goals)
+            .then(getTasks(token))
+    }
+
+    const addGoal = (goal) => {
+        const goalExists = goals.find(g => g.id === goal.id)
+        console.log(!!goalExists)
+        console.log(goals)
+        if (!!goalExists) {
+            setGoals([
+                ...goals.filter(g => g.id !== goal.id),
+                goal
+            ])
+        } else {
+            setGoals([
+                ...goals,
+                goal
+            ])
+        }
     }
 
     return (
-        <Container>
+        <Container className="menu-container">
             <ItemsContainer>
-                <TaskItem setStartTime={ setStartTime } />
+                <TaskItem setTask={ setTask } task={ task } />
                 <ButtonContainer>
-                    <AddGoalButton onClick={ () => addGoal()}>Add Goal</AddGoalButton>
+                    <AddGoalButton onClick={ () => newGoalItem()}>Add Goal</AddGoalButton>
                 </ButtonContainer>
 
-                { Array(goalNumber).fill('').map((n, i) => <GoalItem key={i} />) }
+                { Array(goalNumber).fill('').map((n, i) => <GoalItem  setValue={ addGoal } key={i} goalId={i+1} />) }
 
                 <ButtonContainer>
                     <CreateButton onClick={ () => handleSubmit() }>Create</CreateButton>

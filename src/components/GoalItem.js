@@ -30,30 +30,32 @@ const Label = styled.label`
     color: black;
 `
 
-const GoalItem = () => {
+const GoalItem = ({ setValue, goalId }) => {
     const [title, setTitle] = useState('')
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
 
     useEffect(() => {
-        console.log(title)
-    }, [title]);
+        if (title !== '' && startTime !== '' && endTime !== '') {
+            setValue({ id: goalId, title, start_time: startTime, end_time: endTime })            
+        }
+    }, [title, startTime, endTime]);
 
     return (
         <MenuContainer>
             <Full>
                 <Label>Goal Title</Label>
-                <MenuInput key={Math.random()} onChange={e => setTitle(e.target.value)} />
+                <MenuInput setValue={setTitle} />
             </Full>
 
             <Half>
                 <Label>Start Time</Label>
-                <TimeInput key={Math.random()}/>
+                <TimeInput setValue={setStartTime}/>
             </Half>
 
             <Half>
                 <Label>End Time</Label>
-                <TimeInput key={Math.random()}/>
+                <TimeInput setValue={setEndTime}/>
             </Half>
         </MenuContainer>
     )

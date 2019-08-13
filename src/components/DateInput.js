@@ -2,6 +2,7 @@
 import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import React, { useState, useEffect } from 'react'
+import { daysInMonth } from '../utils/dateUtils'
 
 const Container = styled.div`
     display: grid;
@@ -23,9 +24,8 @@ const Label = styled.label`
     color: gray;
     padding-bottom: -2rem;
 `
-const DateInput = ({ setDate }) => {
+const DateInput = ({ setValue }) => {
     let months = Array(12).fill('');
-    let days = Array(7).fill('');
     const date = new Date()
     const currentYear = date.getFullYear()
     const numYears = Array(11).fill('')
@@ -35,8 +35,10 @@ const DateInput = ({ setDate }) => {
     const [month, setMonth] = useState(1)
     const [year, setYear] = useState(currentYear)
 
+    let days = Array(daysInMonth(month, currentYear)).fill('')
+
     useEffect(() => {
-        setDate(`${year}-${month}-${day}`)
+        setValue(`${year}-${month}-${day}`)
     }, [day, month, year]);
 
     return (

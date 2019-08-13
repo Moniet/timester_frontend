@@ -47,10 +47,15 @@ const generateTimes = () => {
     return times
 }
 
+const daysInMonth = (month, year) => {
+    return new Date(year, month, 0).getDate();
+}
+
 export {
     formatToHours,
     readableDate,
     readableDay,
     readableMonth,
-    generateTimes
+    generateTimes,
+    daysInMonth
 }

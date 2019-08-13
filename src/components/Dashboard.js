@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { css, Global } from '@emotion/core'
 import styled from '@emotion/styled'
@@ -34,7 +34,7 @@ const BannerHeader = styled.h1`
 `
 
 const Dashboard = ({ loadUserData, token, tasks, goals }) => {
-    const menu = React.createRef()
+    const [menuToggled, toggleMenu] = useState(false)
 
     useEffect(() => {
         if (token && tasks.length === 0) {
@@ -43,12 +43,7 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
     })
 
     const showMenu = () => {
-        let op = menu.current.style.opacity
-        if (op === 0) {
-            op = 1
-        } else {
-            op = 0
-        }
+        toggleMenu(!menuToggled)
     }
     
 
@@ -58,9 +53,9 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
                 <Banner>
                     <BannerHeader className="banner-header">Home</BannerHeader>
                 </Banner>
-                <MenuButton showMenu={ showMenu }/>
+                <MenuButton showMenu={ showMenu } />
             </BannerContainer>
-            <TaskMenu ref={ menu } />
+            <TaskMenu menuToggled={ menuToggled }/>
             <TaskGrid tasks={ tasks } />
         </Container>
     )

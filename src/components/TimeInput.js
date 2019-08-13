@@ -5,7 +5,7 @@ import React from 'react'
 import { generateTimes } from '../utils/dateUtils'
 
 
-const Select = styled.select`
+const select = css`
     border: none;
     border-bottom: solid black 2px;
     padding: 1rem 0.5rem 0.5rem 0;
@@ -15,13 +15,13 @@ const Select = styled.select`
 `
 
 
-const DateInput = () => {
+const DateInput = ({ setValue }) => {
     let times = generateTimes();
 
     return (
-        <Select>
+        <select css={select} onChange={e => setValue(e.target.value)}>
             { times.map(t => <option>{ t }</option>) }
-        </Select>
+        </select>
     )
 }
 

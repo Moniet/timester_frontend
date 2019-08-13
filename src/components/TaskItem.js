@@ -5,7 +5,6 @@ import styled from '@emotion/styled'
 import MenuInput from './MenuInput'
 import DateInput from './DateInput'
 import TimeInput from './TimeInput'
-import TaskFields from './TaskFields'
 
 const MenuContainer = styled.div`
     position: relative;
@@ -23,38 +22,47 @@ const Full = styled.div`
     display: grid;
 `
 
+const Half = styled.div`
+    grid-column: span 1;
+    display: grid;
+`
+
 const Label = styled.label`
     color: black;
 `
 
-const TaskItem = ({ setStartTime }) => {
-    const  [task, setTask] = useState({})
-    const  [date, setDate] = useState('')
-    useEffect(() => {
-        console.log(task);
-        // createTask(task)
-    }, [task])
+const textCenter = css`
+    text-align: center;
+`
 
-    const addDate = (newDate) => {
-        setTask({
-            date: newDate
-        })
-        console.log(task)
-    }
-
-    const addTask = newTask => {
-        setTask({
-            ...task,
-            newTask
-        })
-    }
+const TaskItem = ({ task, setTask }) => {
+    // const [task, setTask] = useState({})
+    
+    // useEffect(() => {
+    //     console.log(task);
+    //     // createTask(task)
+    // }, [task])
 
     return (
         <MenuContainer>
-            <TaskFields setStartTime={ setStartTime } />
+            <Full>
+                <Label css={textCenter}>Task Title</Label>
+                <MenuInput setValue={ title => setTask({ ...task, title})} />
+            </Full>
+
+            <Half>
+                <Label>Start Time</Label>
+                <TimeInput setValue={ start_time => setTask({...task, start_time}) }/>
+            </Half>
+                
+            <Half>
+                <Label>End Time</Label>
+                <TimeInput setValue={ end_time => setTask({...task, end_time})} />
+            </Half>
+
             <Full>
                 <Label> Date </Label>
-                <DateInput setDate={ addDate } />
+                <DateInput setValue={date => setTask({...task, date})} />
             </Full>
         </MenuContainer>
     )

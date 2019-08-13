@@ -41,7 +41,7 @@ const getTasks = (token) => {
  }
 
  const createTasks = (token, task, goals) => {
-  fetch(`http://localhost:3000/tasks`, {
+  return fetch(`http://localhost:3000/tasks`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const getTasks = (token) => {
         goals: goals
       }
     })
- }).then(res => res.json())
+ })
 }
 
 export default {
