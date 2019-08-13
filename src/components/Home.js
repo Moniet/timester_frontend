@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 
 const Home = ({ token }) => {
     const homePage = (token.token === 'false' ? <Login /> : <Dashboard token={ token.token } />);
-    console.log(token);
-    
     return (
         homePage 
     )

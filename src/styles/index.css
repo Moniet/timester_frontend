@@ -26,38 +26,3 @@ a {
   font-weight: bold;
   font-size: 4rem;
 }
-
-.slideIn {
-  animation-name: slideIn;
-  animation-duration: 2s;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
-}
-
-.slideOut {
-  animation-name: slideOut;
-  animation-duration: 2s;
-  animation-timing-function: ease-in;
-  animation-fill-mode: forwards;
-  animation-direction: reverse;
-}
-
-@keyframes slideIn {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  } 100% {
-    transform: translateY(0%);
-    opacity: 1;
-  }
-}
-
-keyframes slideOut {
-  0% {
-    transform: translateY(0%);
-    opacity: 1;
-  } 100% {
-    transform: translateY(-100%);
-    opacity: 1;
-  }
-}

@@ -6,12 +6,12 @@ const container = css`
     position: relative;
     width: 100%;
     height: 100%;
-    background: ${colors.bg};
+    background: ${ colors.bg };
 `
 
 const Container = ({ children }) => {
     return (
-        <div css={container}>
+        <div css={ container }>
             { children }
         </div>
     )

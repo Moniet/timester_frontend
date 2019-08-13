@@ -19,6 +19,10 @@ const container = css`
         background-image: ${styles.gradients[num]};
         word-break: break-all;
     }
+
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 const TaskHeader = styled.h3`
@@ -49,8 +53,10 @@ const Task = ({ task, gridSize }) => {
 
     return (
         <div css={container} ref={taskContainer}>
-            <TaskHeader ref={taskDiv}>{ task.attributes.title }</TaskHeader>
-            <TaskTime ref={taskTime}> {startTime} - {endTime}</TaskTime>
+            <Link to={`/goals/${task.id}`}>
+                <TaskHeader ref={taskDiv}>{ task.attributes.title }</TaskHeader>
+                <TaskTime ref={taskTime}> {startTime} - {endTime}</TaskTime>
+            </Link>
         </div>
     )
 }

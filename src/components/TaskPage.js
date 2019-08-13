@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
@@ -58,7 +59,7 @@ const TaskPage = ({ match, tasks }) => {
             </Banner>
             <Grid>
                 { tasks.filter(task => task.attributes.date === match.params.date)
-                    .map((task, i) => <Task task={ task } gridSize={ 25 } key={i} />) 
+                    .map((task, i) => <Task task={ task } gridSize={ 25 } key={i} />)
                 }
             </Grid>
         </Container>
