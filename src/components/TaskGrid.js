@@ -29,7 +29,7 @@ const TaskGrid = ({ tasks }) => {
     const dates = [...new Set(allDates)]
 
     const taskEls = () => {
-        return dates.map(date => {
+        return dates.reverse().map(date => {
             let allTasks = tasks.filter(tasks => tasks.attributes.date === date)
             return (
                 <> 

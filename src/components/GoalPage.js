@@ -5,18 +5,17 @@ import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
 import { readableDay, readableMonth } from '../utils/dateUtils'
-import Grid from './Grid'
 import Container from './Container'
 import Task from './Task'
-import MenuButton from './MenuButton' 
-import { continueStatement } from '@babel/types';
+import MenuButton from './MenuButton'
 import { userData } from '../actions/userDataActions'
+import Goal from './Goal'
 
 const Banner = styled.div`
     position: relative;
     width: 100%;
     overflow-x: hidden;
-
+    margin-bottom: 2rem;
     ${mq[0]} {
         height: 50%;
     }
@@ -30,8 +29,11 @@ const Img = styled.img`
 // sort the goals by ascending time
 // render the goals
 // make box span rows based on time interval 
-
-
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    background: ${colors.bg};
+`
 
 const GoalPage = ({ match, goals, dispatch }) => {
     let token = localStorage.getItem('token')
@@ -45,10 +47,8 @@ const GoalPage = ({ match, goals, dispatch }) => {
     }, [goals])
 
     if (goals) {
-        allGoals = goals.filter(goal => parseInt(goal.task_id) === parseInt(match.params.id))
+        allGoals = goals.filter(goal => parseInt(goal.attributes.task_id) === parseInt(match.params.id))
     }
-
-
 
     return (
         <Container>
@@ -56,14 +56,14 @@ const GoalPage = ({ match, goals, dispatch }) => {
                 <Img css={css} src={require('../assets/img/goalpage-banner.svg')} alt="animation"/>
             </Banner>
             <Grid>
-                { allGoals ? allGoals.map(goal => <div>{ goal.title }</div>) : <div>no goals</div> }
+                { allGoals ? allGoals.map(goal => <Goal goal={goal} />) : <div>no goal homes</div> }
             </Grid>
         </Container>
     )
 }
 
 const mapStateToProps = (state) => {
-    const { goals } = state
+    const { goals } = state.userData
     return {
         goals
     }
