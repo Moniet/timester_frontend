@@ -1,15 +1,15 @@
 const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
+const formatTime = (time) => {
+    if (time < 10) return `0${time}`;
+    if (time >= 10) return `${time}`;
+}
+
 const formatToHours = date => {
     const newDate = new Date(date)
     const hours = newDate.getHours()
     const minutes = newDate.getMinutes()
-
-    const formatTime = (time) => {
-        if (time < 10) return `0${time}`;
-        if (time >= 10) return `${time}`;
-    }
 
     return `${formatTime(hours)}:${formatTime(minutes)}`
 }
@@ -31,11 +31,26 @@ const readableMonth = date => {
     let formattedDate = new Date(date)
     let month = formattedDate.getMonth()
     return months[month]
+
+}
+
+const generateTimes = () => {
+    const times = []
+    const minutes = ['00', '15', '30', '45']
+
+    let t = 0
+    while (t < 24) {
+        minutes.forEach(m => times.push(`${formatTime(t)}:${m}`))
+        t += 1
+    }
+
+    return times
 }
 
 export {
     formatToHours,
     readableDate,
     readableDay,
-    readableMonth
+    readableMonth,
+    generateTimes
 }

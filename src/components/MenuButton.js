@@ -16,7 +16,7 @@ const Button = styled.button`
     left: 80%;
     transform: translate(-1em, -1em);
     outline: none;
-    box-shadow: ${styles.shadow}
+    box-shadow: ${styles.shadow};
     z-index: 2000;
 `
 
@@ -25,7 +25,7 @@ const MenuButton = ({ showMenu }) => {
     const [menuOpen, setMenuOpen] = useState(false)
 
     const handleClick = () => {
-        // showMenu();
+        showMenu();
         setMenuOpen(!menuOpen)
     }
 

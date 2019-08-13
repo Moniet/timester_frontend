@@ -60,5 +60,6 @@ const getTasks = (token) => {
 export default {
     login,
     registerUser,
-    getTasks
+    getTasks,
+    createTasks
 }

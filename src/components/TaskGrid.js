@@ -33,7 +33,7 @@ const TaskGrid = ({ tasks }) => {
             let allTasks = tasks.filter(tasks => tasks.attributes.date === date)
             return (
                 <> 
-                    <DateHeader key={ Math.random() }>
+                    <DateHeader >
                         <Link to={`/tasks/${date}`} >
                             { readableDate(date) }
                         </Link>

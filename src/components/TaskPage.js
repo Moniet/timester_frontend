@@ -58,7 +58,7 @@ const TaskPage = ({ match, tasks }) => {
             </Banner>
             <Grid>
                 { tasks.filter(task => task.attributes.date === match.params.date)
-                    .map(task => <Task task={ task } gridSize={ 25 }/>) 
+                    .map((task, i) => <Task task={ task } gridSize={ 25 } key={i} />) 
                 }
             </Grid>
         </Container>

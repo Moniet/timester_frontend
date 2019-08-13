@@ -18,6 +18,7 @@ const Banner = styled.div`
     ${mq[0]} {
         clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
     }
+    z-index: 1000;
 `
 
 const BannerContainer = styled.div`
@@ -39,7 +40,6 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
         if (token && tasks.length === 0) {
             loadUserData(token)
         }
-        menu.current.style.opacity = 0
     })
 
     const showMenu = () => {
