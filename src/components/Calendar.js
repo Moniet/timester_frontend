@@ -53,6 +53,9 @@ const Day = styled.div`
     height: 40px;
     text-align: center;
     background: rgba(0,0,0,0.15);
+    a {
+        color: white;
+    }
 `
 
 // render calendar based on the current month 
@@ -85,7 +88,10 @@ const Calendar = ({ tasks, dispatch }) => {
                 { Array(daysNum).fill('').map((n, i) => {
                     return ( 
 
-                        <Link to={`/tasks/${year}-${formatTime(month+1)}-${formatTime(i+1)}`}><Day>{ i + 1 }</Day></Link>
+                        <Day>
+                            <Link to={`/tasks/${year}-${formatTime(month+1)}-${formatTime(i+1)}`}>{ i + 1 }</Link>
+                        </Day>
+                       
                     )
                     } 
                 )}

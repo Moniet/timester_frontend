@@ -4,6 +4,7 @@ export const colors = {
     tertiary: '#FC5C7D',
     textLight: '#FFFFFF',
     textDark: '#4D4D4D',
+    bgDark: '#4D4D4D',
     menu: '#FC5C7D',
     button: '#000',
     bg: '#005AA7'

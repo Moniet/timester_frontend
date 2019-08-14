@@ -83,8 +83,8 @@ const TaskMenu = ({ token, getTasks, menuToggled }) => {
 
     const addGoal = (goal) => {
         const goalExists = goals.find(g => g.id === goal.id)
-        console.log(!!goalExists)
-        console.log(goals)
+        // console.log(!!goalExists)
+        // console.log(goals)
         if (!!goalExists) {
             setGoals([
                 ...goals.filter(g => g.id !== goal.id),

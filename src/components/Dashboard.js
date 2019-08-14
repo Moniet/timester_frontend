@@ -63,7 +63,6 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
 
 const mapStateToProps = (state, ownProps) => {
     let { tasks, goals} = state.userData;
-    console.log(state)
     return {
         tasks,
         goals
