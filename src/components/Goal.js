@@ -3,7 +3,8 @@ import { jsx, css } from '@emotion/core'
 import React from 'react'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
-import { formatToHours } from '../utils/dateUtils'
+import { formatToHours, formatTime } from '../utils/dateUtils'
+import { getMinutes, getFormattedDate } from '../utils/timeUtils'
 
 const Container = styled.div`
     grid-column-end: span 2;
@@ -78,16 +79,24 @@ const span3 = css`
     grid-column-end: span 3;
 `
 
-const Goal = ({ goal }) => {
-    const startTime = parseInt(formatToHours(goal.attributes.start_time));
-    const endTime = parseInt(goal.attributes.end_time);
-    const duration = startTime - endTime;
-    console.log(`duration: ${startTime}`);
-    
-    const rowTemplate = (duration < 1 ? '1fr 100px 1fr' : '1fr 300px 1fr')
-    const currentHour = new Date().getHours()
-    const titleBackground = (currentHour > startTime && currentHour < endTime ) ? colors.primary : '#FFFDE4'
+const Goal = ({ goal, time, animateRiver }) => {
+    const { hour, minutes, seconds } = time
+    const currentTime = `${formatTime(hour)}:${formatTime(minutes)}`
+    const startHour = formatToHours(goal.attributes.start_time)
+    const endHour = formatToHours(goal.attributes.end_time)
+    const startTime = new Date(goal.attributes.start_time)
+    const currentDate = new Date(`2000-01-01T${currentTime}:${formatTime(seconds)}`)
+    const endTime = new Date(goal.attributes.end_time)
+    const duration = (endTime - startTime) / 1000 // converts ms to secs
 
+    const timeElapsed = (currentDate - startTime) / 1000
+    
+    const rowTemplate = (duration > 3600 ? '1fr 200px 1fr' : '1fr 100px 1fr')
+    const hourBool = currentTime > startHour && currentTime < endHour
+    const titleBackground = hourBool ? colors.primary : '#FFFDE4'
+    
+    if (hourBool) animateRiver(duration, timeElapsed);
+    
     return (
         <Container gridRowTemplate={rowTemplate}>
             <Time>{ formatToHours(goal.attributes.start_time) }</Time>

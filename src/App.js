@@ -9,6 +9,7 @@ import Home from './components/Home'
 import Login from './components/Login'
 import TaskPage from './components/TaskPage'
 import GoalPage from './components/GoalPage'
+import Calendar from './components/Calendar'
 import { setToken } from './actions/tokenActions'
 
 const App = ({ setTokenState, token }) => {
@@ -25,6 +26,7 @@ const App = ({ setTokenState, token }) => {
         <Route exact path="/Login" component={ Login } />
         <Route path="/tasks/:date" component={TaskPage} />
         <Route path="/goals/:id" component={GoalPage} />
+        <Route path="/calendar" component={Calendar} />
       </Layout>
     </Router>
   );

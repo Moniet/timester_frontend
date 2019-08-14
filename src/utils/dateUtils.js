@@ -31,7 +31,10 @@ const readableMonth = date => {
     let formattedDate = new Date(date)
     let month = formattedDate.getMonth()
     return months[month]
+}
 
+export const getMonth = n => {
+    return months[n]
 }
 
 const generateTimes = () => {
@@ -52,6 +55,7 @@ const daysInMonth = (month, year) => {
 }
 
 export {
+    formatTime,
     formatToHours,
     readableDate,
     readableDay,

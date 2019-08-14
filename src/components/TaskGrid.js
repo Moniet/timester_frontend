@@ -38,7 +38,7 @@ const TaskGrid = ({ tasks }) => {
                             { readableDate(date) }
                         </Link>
                     </DateHeader>
-                    { allTasks.map(task => <Task task={ task } gridSize={ gridSize } key={ task.id } />) }
+                    { allTasks.map(task => <Task task={ task } gridSize={ gridSize } key={ parseInt(task.id) } />) }
                 </>
             )
         })

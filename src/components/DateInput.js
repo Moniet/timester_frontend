@@ -46,21 +46,21 @@ const DateInput = ({ setValue }) => {
             <div>
                 <Label>dd/ </Label>
                 <Select onInput={e => setDay(e.target.value)} value={day}>
-                    { days.map((d, i) => <option>{ i + 1 }</option>) }
+                    { days.map((d, i) => <option key={ i }>{ i + 1 }</option>) }
                 </Select>
             </div>
 
             <div>
                 <Label>mm/ </Label>
                 <Select onInput={e => setMonth(e.target.value) }>
-                    { months.map((m, i) => <option>{ i + 1 }</option>) }
+                    { months.map((m, i) => <option key={ i }>{ i + 1 }</option>) }
                 </Select>
             </div>
 
             <div>
                 <Label>yy</Label>
                 <Select onInput={e => setYear(e.target.value) }>
-                    { years.map((y) => <option>{ y }</option>) }
+                    { years.map((y, i) => <option key={ i }>{ y }</option>) }
                 </Select>
             </div>
         </Container>
