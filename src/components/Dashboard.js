@@ -38,7 +38,7 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
     const [menuToggled, toggleMenu] = useState(false)
 
     useEffect(() => {
-        if (token && tasks.length === 0) {
+        if (token !== 'false' && tasks.length === 0) {
             loadUserData(token)
         }
     })
@@ -47,7 +47,6 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
         toggleMenu(!menuToggled)
     }
     
-
     return (
         <Container>
             <BannerContainer>

@@ -1,68 +1,34 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TIMESTER
+Timester is a task managing app that aims to promote a goal oriented approach to
+managing tasks.
 
-## Available Scripts
+![timster app login page](/src/assets/demo-img/sign-in.png)
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Once you've created an account and signed in, you can create tasks like so:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+![timster app home page](/src/assets/demo-img/task-form.png)
+![timster app home page](/src/assets/demo-img/goal-form.png)
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+After creating your goals they will show up on the home page:
 
-### `npm run build`
+![timster app home page](/src/assets/demo-img/home-page.png)
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You can also use the calendar to see tasks completed on a particular day:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+![timster app home page](/src/assets/demo-img/calendar.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+Clicking a date on the calendar will open a page that will look like this (it shows all the tasks for that day)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+![timster app home page](/src/assets/demo-img/task-page.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Clicking on a task will show the goals page. 
+In the goals page the animation of the river shows the time left for each task.
+Additionally the timeline helps you visualise time based on the length of the task. 
+The timeline will be longer for more time consuming tasks.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+![timster app home page](/src/assets/demo-img/task-page.png)
