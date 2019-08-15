@@ -8,7 +8,8 @@ const Button = styled.button`
     font-size: 1.25em;
     font-weight: 700;
     color: white;
-    background: ${colors.tertiary};
+    background: transparent;
+    padding: 0;
     border: none;
     border-radius: 50%;
     position: absolute;
@@ -16,8 +17,11 @@ const Button = styled.button`
     left: 80%;
     transform: translate(-1em, -1em);
     outline: none;
-    box-shadow: ${styles.shadow};
     z-index: 2000;
+`
+
+const Image = styled.img`
+    width: 100%;
 `
 
 const MenuButton = ({ showMenu }) => {
@@ -30,7 +34,9 @@ const MenuButton = ({ showMenu }) => {
     }
 
     return (
-        <Button onClick={() => handleClick() }>+</Button>
+        <Button onClick={() => handleClick() }>
+            <Image src={require('../assets/img/menu-btn.svg')} />
+        </Button>
     )
 }
 

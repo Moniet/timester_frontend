@@ -4,17 +4,26 @@ import { Router, Link, Route } from 'react-router-dom'
 import { colors, mq } from '../styles/theme'
 
 const Navigation = styled.nav`
+    position: fixed;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+    align-items: center;
     width: 100vw;
     height: calc(50px + 1vw);
-    background: ${colors.bgDark};
+    background: ${colors.bg};
+    background-image: ${colors.bg};
+    border-top: solid 1px white;
+    bottom: 0;
 
     a {
-        color: ${colors.primary}
+        color: white;
         font-weight: bold;
-        font-size: 1.25rem;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        &:hover {
+            cursor: pointer;
+        }
     }
 `
 

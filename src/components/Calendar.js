@@ -12,6 +12,7 @@ import { userData } from '../actions/userDataActions'
 import Goal from './Goal'
 import { getCurrentTime, getMinutes } from '../utils/timeUtils'
 import { Link } from 'react-router-dom'
+import Nav from './Nav'
 
 const Banner = styled.div`
     position: relative;
@@ -25,11 +26,12 @@ const BannerContainer = styled.div`
     display: grid;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(to top, ${colors.secondary}, ${colors.tertiary})
+    background: linear-gradient(to top, ${colors.secondary}, ${colors.tertiary});
+    clip-path: polygon(0 0, 100% 0, 100% 75%, 66% 89%, 29% 90%, 0 100%);
 `
 
 const BannerHeader = styled.h1`
-  
+  margin-top: -2rem;
 `
 
 const SvgContainer = styled.div`
@@ -96,6 +98,7 @@ const Calendar = ({ tasks, dispatch }) => {
                     } 
                 )}
             </Grid>
+            <Nav />
         </Container>
     )
 }

@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import Layout from './Layout'
 import login from '../actions/loginActions';
 import register from '../actions/registerActions';
+import Greeting from './Greeting'
 
 const Container = styled('div')`
     display: flex;
@@ -124,6 +125,7 @@ const Login = (props) => {
 
     return (
         <Container>
+            <Greeting />
             <img src={require('../assets/img/form-memphis-design-top.svg')} alt=""/>
             <Form role="form" onSubmit={ handleSubmit }>
                 { nameInput() }

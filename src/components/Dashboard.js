@@ -8,6 +8,7 @@ import TaskGrid from '../components/TaskGrid'
 import Container from '../components/Container'
 import MenuButton from './MenuButton'
 import TaskMenu from './TaskMenu'
+import Nav from './Nav'
 
 const Banner = styled.div`
     position: relative;
@@ -57,6 +58,7 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
             </BannerContainer>
             <TaskMenu menuToggled={ menuToggled }/>
             <TaskGrid tasks={ tasks } />
+            <Nav />
         </Container>
     )
 }

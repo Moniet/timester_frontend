@@ -13,6 +13,7 @@ const Container = styled.div`
 const Select = styled.select`
     border: none;
     border-bottom: solid black 2px;
+    border-radius: 0%;
     padding: 1rem 0.5rem 0.5rem 0;
     margin-top: 0.25rem;
     background: transparent;

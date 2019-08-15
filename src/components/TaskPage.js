@@ -7,6 +7,7 @@ import { readableDay, readableMonth } from '../utils/dateUtils'
 import Grid from './Grid'
 import Container from './Container'
 import Task from './Task'
+import Nav from './Nav'
 
 const DateContainer = styled.div`
     width: 100%;
@@ -62,6 +63,7 @@ const TaskPage = ({ match, tasks }) => {
                     .map((task, i) => <Task task={ task } gridSize={ 25 } key={i} />)
                 }
             </Grid>
+            <Nav />
         </Container>
     )
 }
