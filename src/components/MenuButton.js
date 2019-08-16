@@ -13,15 +13,15 @@ const Button = styled.button`
     border: none;
     border-radius: 50%;
     position: absolute;
-    top: 30%;
-    left: 80%;
-    transform: translate(-1em, -1em);
+    top: calc(40% + 2.5vh);
+    left: 50%;
+    transform: translate(-50%, -3.5rem);
     outline: none;
     z-index: 2000;
 `
 
 const Image = styled.img`
-    width: 100%;
+    width: 120%;
 `
 
 const MenuButton = ({ showMenu }) => {

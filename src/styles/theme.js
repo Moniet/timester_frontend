@@ -7,7 +7,7 @@ export const colors = {
     bgDark: '#4D4D4D',
     menu: '#FC5C7D',
     button: '#000',
-    bg: '#005AA7'
+    bg: '#005AA7',
 }
 
 export const styles = {

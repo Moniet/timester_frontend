@@ -81,7 +81,7 @@ const Button = styled('button')`
     ${mq[1]} { width: 50%; }
 `
 
-const Login = (props) => {
+const Login = ({ login, register }) => {
 
     const [name, setName] = useState('')
     const [username, setUsername] = useState('')
@@ -107,9 +107,9 @@ const Login = (props) => {
     const handleSubmit = e => {
         e.preventDefault()
         if (!registerPage) 
-            props.login({ username: username, password: password })
+            login({ username: username, password: password })
         else 
-            props.register({ name: name, username: username, password: password })
+            register({ name: name, username: username, password: password })
     }
 
     const nameInput = () => {

@@ -15,18 +15,18 @@ import { setToken } from './actions/tokenActions'
 const App = ({ setTokenState, token }) => {
   useEffect(() => {
     setTokenState(localStorage.getItem('token'))
-  }, []);
+  }, [token]);
 
-  // update state with the token
+  // update state with the token 
   // get state and map to props, pass down props to Home 
   return (
     <Router>
       <Layout>
         <Route exact path="/" render={ () => <Home token={ token } /> } />
         <Route exact path="/Login" component={ Login } />
-        <Route path="/tasks/:date" component={TaskPage} />
-        <Route path="/goals/:id" component={GoalPage} />
-        <Route path="/calendar" component={Calendar} />
+        <Route path="/tasks/:date" component={ TaskPage } />
+        <Route path="/goals/:id" component={ GoalPage } />
+        <Route path="/calendar" component={ Calendar } />
       </Layout>
     </Router>
   );

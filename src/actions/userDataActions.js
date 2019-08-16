@@ -19,6 +19,5 @@ export const userData = token => {
                 // // let d = moment(date)
                 // let d = new Date(date)
             })
-            
     }
 }

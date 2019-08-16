@@ -4,9 +4,11 @@ import { css, Global } from '@emotion/core'
 import styled from '@emotion/styled'
 import { userData } from '../actions/userDataActions'
 import { colors, mq } from '../styles/theme'
-import TaskGrid from '../components/TaskGrid'
+
 import Container from '../components/Container'
+import TaskGrid from '../components/TaskGrid'
 import MenuButton from './MenuButton'
+import DashboardMessage from './DashboardMessage'
 import TaskMenu from './TaskMenu'
 import Nav from './Nav'
 
@@ -17,7 +19,7 @@ const Banner = styled.div`
     background: linear-gradient(30deg, ${colors.primary}, ${colors.secondary}, ${colors.tertiary});
 
     ${mq[0]} {
-        clip-path: polygon(0 0, 100% 0, 100% 60%, 0% 100%);
+        clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%);
     }
     z-index: 1000;
 `
@@ -38,10 +40,8 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
     const [menuToggled, toggleMenu] = useState(false)
 
     useEffect(() => {
-        if ((token.token === 'false' || !!token) && tasks.length === 0) {
-            loadUserData(token)
-        }
-    })
+        loadUserData(token)
+    }, [])
 
     const showMenu = () => {
         toggleMenu(!menuToggled)
@@ -56,7 +56,7 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
                 <MenuButton showMenu={ showMenu } />
             </BannerContainer>
             <TaskMenu menuToggled={ menuToggled }/>
-            <TaskGrid tasks={ tasks } />
+            { tasks.length > 0 ? <TaskGrid tasks={ tasks } /> : <DashboardMessage message="CLICK THE MENU TO CREATE TASKS" />}
             <Nav />
         </Container>
     )

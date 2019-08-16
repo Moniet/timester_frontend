@@ -77,8 +77,10 @@ const TaskMenu = ({ token, getTasks, menuToggled }) => {
     }
 
     const handleSubmit = () => {
-        api.createTasks(token, task, goals)
+        if (task !== {} && goals.length > 0) {
+            api.createTasks(token, task, goals)
             .then(getTasks(token))
+        }
     }
 
     const addGoal = (goal) => {
