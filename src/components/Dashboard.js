@@ -59,7 +59,7 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
             { tasks.length > 0 ? <TaskGrid tasks={ tasks } /> : <DashboardMessage message="CLICK THE MENU TO CREATE TASKS" />}
             <Nav />
         </Container>
-    )
+    ) 
 }
 
 const mapStateToProps = (state, ownProps) => {

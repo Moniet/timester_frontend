@@ -13,7 +13,6 @@ const Container = styled.div`
 const Select = styled.select`
     border: none;
     border-bottom: solid black 2px;
-    border-radius: 0%;
     padding: 1rem 0.5rem 0.5rem 0;
     margin-top: 0.25rem;
     background: transparent;
@@ -46,21 +45,21 @@ const DateInput = ({ setValue }) => {
         <Container>
             <div>
                 <Label>dd/ </Label>
-                <Select onInput={e => setDay(e.target.value)} value={day}>
+                <Select key={ Math.random() } onChange={e => setDay(e.target.value)} value={day}>
                     { days.map((d, i) => <option key={ i }>{ i + 1 }</option>) }
                 </Select>
             </div>
 
             <div>
                 <Label>mm/ </Label>
-                <Select onInput={e => setMonth(e.target.value) }>
+                <Select key={ Math.random() } onChange={e => setMonth(e.target.value) }>
                     { months.map((m, i) => <option key={ i }>{ i + 1 }</option>) }
                 </Select>
             </div>
 
             <div>
                 <Label>yy</Label>
-                <Select onInput={e => setYear(e.target.value) }>
+                <Select key={ Math.random() } onChange={e => setYear(e.target.value) }>
                     { years.map((y, i) => <option key={ i }>{ y }</option>) }
                 </Select>
             </div>

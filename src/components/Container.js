@@ -12,7 +12,7 @@ const container = css`
 
 const Container = ({ children }) => {
     return (
-        <div css={ container }>
+        <div css={ container } className="container">
             { children }
         </div>
     )

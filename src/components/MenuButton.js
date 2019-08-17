@@ -28,14 +28,14 @@ const Image = styled.img`
 const MenuButton = ({ showMenu }) => {
     const [menuOpen, setMenuOpen] = useState(false)
     const handleClick = () => {
-        showMenu();
+        showMenu()
         setMenuOpen(!menuOpen)
     }
 
     useEffect(() => {
         const menu = document.querySelector('.menu-button');
-        if (menuOpen) TweenLite.to(menu, 0.5, {transform: 'rotate(-45deg)', ease:Power2.easeInOut });
-        if (!menuOpen) TweenLite.to(menu, 0.5, {transform: 'rotate(0deg)', ease:Power2.easeInOut });
+        if (menuOpen) TweenLite.to(menu, 0.4, { transform: 'rotate(-45deg)', ease:Power2.easeInOut });
+        if (!menuOpen) TweenLite.to(menu, 0.4, { transform: 'rotate(0deg)', ease:Power2.easeInOut });
     }, [showMenu]) 
 
     return (

@@ -14,7 +14,7 @@ const Container = styled.div`
     height: 100vh;
     background: white;
     overflow-y: scroll;
-    z-index: 1;
+    z-index: 500;
     top: 0;
     display: flex;
     justify-content: center;
@@ -67,7 +67,7 @@ const TaskMenu = ({ token, getTasks, menuToggled }) => {
     const [goals, setGoals] = useState([])
     
     useEffect(() => {
-        const el = document.querySelector('.menu-container')
+        const el = document.querySelector('.menu-container');
         if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
     }, [task, goals, goalNumber, menuToggled])
@@ -77,7 +77,7 @@ const TaskMenu = ({ token, getTasks, menuToggled }) => {
     }
 
     const handleSubmit = () => {
-        if (task !== {} && goals.length > 0) {
+        if (task.title && goals.length > 0) {
             api.createTasks(token, task, goals)
             .then(getTasks(token))
         }

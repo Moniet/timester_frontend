@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
@@ -47,7 +47,10 @@ const TaskPage = ({ match, tasks }) => {
     const date = new Date(match.params.date)
     const day = readableDay(date)
     const dayNum = match.params.date.split('-')[2]
+    const grid = useRef();
+    let gridSize = 25
 
+    
     return (
         <Container>
             <Banner>
@@ -58,9 +61,9 @@ const TaskPage = ({ match, tasks }) => {
                 </DateContainer>
                 <BannerHeader className="banner-header">{ day }</BannerHeader>
             </Banner>
-            <Grid>
+            <Grid ref={grid}>
                 { tasks.filter(task => task.attributes.date === match.params.date)
-                    .map((task, i) => <Task task={ task } gridSize={ 25 } key={i} />)
+                    .map((task, i) => <Task task={ task } gridSize={ gridSize } key={i} />)
                 }
             </Grid>
             <Nav />
