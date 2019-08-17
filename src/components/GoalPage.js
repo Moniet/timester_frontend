@@ -1,16 +1,14 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
-import { readableDay, readableMonth, formatTime} from '../utils/dateUtils'
+import { formatTime} from '../utils/dateUtils'
 import Container from './Container'
-import Task from './Task'
-import MenuButton from './MenuButton'
 import { userData } from '../actions/userDataActions'
 import Goal from './Goal'
-import { getCurrentTime, getMinutes } from '../utils/timeUtils'
+import { getCurrentTime } from '../utils/timeUtils'
 
 const Banner = styled.div`
     position: relative;

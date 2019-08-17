@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { css, Global } from '@emotion/core'
 import styled from '@emotion/styled'
 import { userData } from '../actions/userDataActions'
 import { colors, mq } from '../styles/theme'

@@ -13,7 +13,6 @@ const input = css`
 `
 
 const MenuInput = ({ setValue }) => {
-
     return (
         <input type="text" css={input} onChange={e => setValue(e.target.value)}/>
     )

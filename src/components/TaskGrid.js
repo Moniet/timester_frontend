@@ -1,12 +1,10 @@
 import React from 'react'
-import { css, Global } from '@emotion/core'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { colors, mq } from '../styles/theme'
+import { colors } from '../styles/theme'
 import Task from './Task'
-import TaskPage from './TaskPage'
 import Grid from './Grid'
-import { formatToHours, readableDate } from '../utils/dateUtils'
+import {  readableDate } from '../utils/dateUtils'
 
 const DateHeader = styled.h2`
     a { 

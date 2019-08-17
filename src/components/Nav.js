@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
-import { Router, Link, Route } from 'react-router-dom'
-import { colors, mq } from '../styles/theme'
+import { Link } from 'react-router-dom'
+import { colors } from '../styles/theme'
 
 const Navigation = styled.nav`
     position: fixed;

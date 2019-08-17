@@ -1,7 +1,5 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import styled from '@emotion/styled'
 import React, { useState, useEffect } from 'react'
+import styled from '@emotion/styled'
 import { daysInMonth } from '../utils/dateUtils'
 
 const Container = styled.div`

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
-import  { colors, styles } from '../styles/theme'
-import { TweenLite, Power2, CSSRulePlugin} from 'gsap/TweenMax'
+import { TweenLite, Power2 } from 'gsap/TweenMax'
 
 const Button = styled.button`
     width: 2em;

@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import { jsx, css, Global } from '@emotion/core'
-import React, { useState, useEffect } from 'react'
+import { jsx, css } from '@emotion/core'
+import React from 'react'
 import styled from '@emotion/styled'
 import MenuInput from './MenuInput'
 import DateInput from './DateInput'

@@ -1,5 +1,3 @@
-import api from '../../adapters/api'
-
 const initState = {};
 
 const loginReducer = (state = initState, action) => {

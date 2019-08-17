@@ -1,16 +1,10 @@
-/** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
 import { daysInMonth, getMonth, formatTime } from '../utils/dateUtils'
 import Container from './Container'
-import TaskMenu from './TaskMenu'
-import MenuButton from './MenuButton'
 import { userData } from '../actions/userDataActions'
-import Goal from './Goal'
-import { getCurrentTime, getMinutes } from '../utils/timeUtils'
 import { Link } from 'react-router-dom'
 import Nav from './Nav'
 

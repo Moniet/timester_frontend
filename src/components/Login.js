@@ -1,11 +1,7 @@
 import React, { useState } from 'react'
-import { css, jsx } from '@emotion/core'
 import styled from '@emotion/styled'
 import { colors, mq, styles } from '../styles/theme'
-import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
-
-import Layout from './Layout'
 import login from '../actions/loginActions';
 import register from '../actions/registerActions';
 import Greeting from './Greeting'
