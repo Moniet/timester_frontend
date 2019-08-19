@@ -7,7 +7,6 @@ const container = css`
     width: 100%;
     height: 100%;
     background: ${ colors.bg };
-    margin-bottom: calc(50px + 1vw);
 `
 
 const Container = ({ children }) => {

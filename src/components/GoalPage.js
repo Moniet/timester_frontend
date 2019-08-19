@@ -5,18 +5,25 @@ import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
 import { formatTime} from '../utils/dateUtils'
-import Container from './Container'
 import { userData } from '../actions/userDataActions'
-import Goal from './Goal'
 import { getCurrentTime } from '../utils/timeUtils'
+import api from '../adapters/api'
+import Container from './Container'
+import Goal from './Goal'
+import MenuButton from './MenuButton'
+import Menu from './Menu'
+import TaskMenu from './TaskMenu';
 
 const Banner = styled.div`
     position: relative;
     width: 100%;
     overflow-x: hidden;
-    margin-bottom: 5rem;
-`
+    z-index: 2000;
 
+    ${mq[0]} {
+       margin-bottom: 3rem;
+   }
+`
 
 const Img = styled.img`
     width: 152%;
@@ -34,44 +41,62 @@ const riverStroke = css`
     stroke-dashoffset: 360px;
     stroke-dasharray: 360px;
 `
-// update the current time and display it (X)
-// based on the current time we need to set interval in seconds for the river to get updated
-    // ^^ get duration of current goal, 
-    // get seconds passed of current goal, 
-    // update stroke dash offset with percentage by converting to px
-// based on the current time the box should be highlighted 
 
-const GoalPage = ({ match, goals, dispatch }) => {
+const ButtonContainer = styled.div`
+    position: relative;
+    margin-bottom: 6rem;
+`
+
+const GoalPage = ({ match, goals, tasks, loadUserData}) => {
     let token = localStorage.getItem('token')
     let allGoals; 
     let river = document.querySelector('#river-front')
+    let time = getCurrentTime();
+    const [menuToggled, toggleMenu] = useState(false)
+    const [taskMenuToggled, toggleTaskMenu] = useState(false)
+    let id = match.params.id; 
+    let task;
+    let currentGoals;
+    setTimeout(() => { time = getCurrentTime() }, 1000)
 
-    const [time, updateTime] = useState(getCurrentTime());
-
-    useEffect(() => {
-        if (goals.length === 0 && token !== 'false') dispatch(userData(localStorage.getItem('token')));
-        setTimeout(() => updateTime(getCurrentTime()), 1000)
-    }, [goals, time])
+    if (goals.length !== 0) {
+        id =  parseInt(goals[0].attributes.task_id)
+        task = tasks.find(t => parseInt(t.id) === id).attributes
+    }
 
     if (goals) {
         allGoals = goals.filter(goal => parseInt(goal.attributes.task_id) === parseInt(match.params.id))
     }
+    
+    useEffect(() => {
+        if (goals.length === 0 && token !== 'false') loadUserData(localStorage.getItem('token'));
+    }, [goals, tasks, match])
+
+    const showMenu = () => {
+        if (taskMenuToggled && menuToggled) {
+            toggleTaskMenu(!taskMenuToggled)
+        } else {
+            toggleMenu(!menuToggled)
+        }
+    }
+
+    const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
+    const editTask = (newTask, goals) => {
+        newTask.id = task.id
+        api.editTask(token, newTask, goals).then(loadUserData(token))
+    }
 
     const animateRiver = (duration, timeElapsed) => { // these values are in seconds 
-        // get percentage of time passed
-        // convert percent into pixels of stroke dashOffset
         let percent = (100 * timeElapsed) / duration
         let offset = 360 - ((360 * percent) / 100)
         
-        if (!!river) {
-            river.style.strokeDashoffset = `${offset}px`
-        }
+        if (!!river) river.style.strokeDashoffset = `${offset}px`
     }
 
     return (
         <Container>
             <Banner>
-            <svg viewBox="0 0 376 406" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeLinecap="square" strokeLinejoin="round" strokeMiterlimit="1.5">
+                <svg viewBox="0 0 376 406" xmlns="http://www.w3.org/2000/svg" fillRule="evenodd" clipRule="evenodd" strokeLinecap="square" strokeLinejoin="round" strokeMiterlimit="1.5">
                 <path d="M375.5 0H.5v358.839c62.789-11.476 125.19 7.561 187.5 22.828 62.517-15.582 125.022-42.175 187.5-32.334V0z"
                     fill="url(#_Linear1)" />
                 <path d="M.5 345.788v-60.241l18.295-18.294 21.628 21.628 35.294-35.295 35.295 35.295v56.907H.5z" fill="#852e41" />
@@ -101,18 +126,31 @@ const GoalPage = ({ match, goals, dispatch }) => {
                 </defs>
             </svg>
             </Banner>
+            <ButtonContainer>
+                <MenuButton showMenu={ showMenu } menuToggled={ menuToggled } />
+            </ButtonContainer>
+            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } editMenu={ true } />
+            <TaskMenu menuToggled={ taskMenuToggled } submitTask={ editTask } currentTask={ task } currentGoals={ allGoals } />
             <Grid>
-                { allGoals ? allGoals.map((goal, i) => <Goal key={i} goal={goal} time={ time } animateRiver={ animateRiver }/>) : <div>no goal homes</div> }
+                { allGoals ? allGoals.map((goal, i) => <Goal key={i} goal={goal} time={ time } animateRiver={ animateRiver } />) : '' }
             </Grid>
         </Container>
     )
 }
 
 const mapStateToProps = (state) => {
-    const { goals } = state.userData
+    const { goals, tasks } = state.userData
     return {
-        goals
+        goals,
+        tasks
     }
 }
 
-export default connect(mapStateToProps, null)(GoalPage)
+const mapDispatchToProps = dispatch => {
+    return {
+        loadUserData: token => dispatch(userData(token))
+    }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(GoalPage)

@@ -1,12 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
 import { readableDay, readableMonth } from '../utils/dateUtils'
+import { userData } from '../actions/userDataActions'
 import Grid from './Grid'
 import Container from './Container'
 import Task from './Task'
-import Nav from './Nav'
 
 const DateContainer = styled.div`
     width: 100%;
@@ -42,10 +42,18 @@ const BannerHeader = styled.h1`
   transform: translate(-50%, -50%);
 `
 
-const TaskPage = ({ match, tasks }) => {
+const TaskPage = ({ match, tasks , token, loadUserData}) => {
     const date = new Date(match.params.date)
     const day = readableDay(date)
     const dayNum = match.params.date.split('-')[2]
+
+    useEffect(() => {
+       if (!tasks) loadUserData(token);
+    }, [tasks])
+
+    if (!tasks) {
+        loadUserData(localStorage.getItem('token'))
+    }
     
     return (
         <Container>
@@ -57,20 +65,25 @@ const TaskPage = ({ match, tasks }) => {
                 <BannerHeader className="banner-header">{ day }</BannerHeader>
             </Banner>
             <Grid>
-                { tasks.filter(task => task.attributes.date === match.params.date)
-                    .map((task, i) => <Task task={ task } key={i} />)
-                }
+                { tasks.filter(task => task.attributes.date === match.params.date).map((task, i) => <Task task={ task } key={i} />) }
             </Grid>
-            <Nav />
         </Container>
     )
 }
 
 const mapStateToProps = (state) => {
     const { tasks } = state.userData
+    const { token } = state
     return {
-        tasks
+        tasks,
+        token
     }
 }
 
-export default connect(mapStateToProps, null)(TaskPage)
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadUserData: token => dispatch(userData(token))
+    }
+} 
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskPage)

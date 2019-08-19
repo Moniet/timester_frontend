@@ -1,4 +1,4 @@
-const baseUrl = 'http://localhost:3000/';
+const baseUrl = 'http://localhost:3000';
 
 const login = (user) => {
     return fetch(`${baseUrl}/login`, {
@@ -32,7 +32,7 @@ const registerUser = (user) => {
 }
 
 const getTasks = (token) => {
-    return fetch(`http://localhost:3000/tasks`, {
+    return fetch(`${baseUrl}/tasks`, {
      method: 'GET',
      headers: {
        Authorization: `Bearer ${token}`
@@ -41,8 +41,25 @@ const getTasks = (token) => {
  }
 
  const createTasks = (token, task, goals) => {
-  return fetch(`http://localhost:3000/tasks`, {
+  return fetch(`${baseUrl}/tasks`, {
     method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({
+      user: {
+        task: task,
+        goals: goals
+      }
+    })
+ })
+}
+
+const editTask = (token, task, goals) => {
+  return fetch(`${baseUrl}/tasks`, {
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'application/json',

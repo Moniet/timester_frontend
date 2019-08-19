@@ -35,34 +35,27 @@ const textCenter = css`
     text-align: center;
 `
 
-const TaskItem = ({ task, setTask }) => {
-    // const [task, setTask] = useState({})
-    
-    // useEffect(() => {
-    //     console.log(task);
-    //     // createTask(task)
-    // }, [task])
-
+const TaskItem = ({ task, setTask }) => {    
     return (
         <MenuContainer>
             <Full>
                 <Label css={textCenter}>Task Title</Label>
-                <MenuInput setValue={ title => setTask({ ...task, title})} />
+                <MenuInput setValue={ title => setTask({ ...task, title})} value={ task.title } />
             </Full>
 
             <Half>
                 <Label>Start Time</Label>
-                <TimeInput setValue={ start_time => setTask({...task, start_time}) }/>
+                <TimeInput setValue={ start_time => setTask({...task, start_time}) } value={ task.start_time } />
             </Half>
                 
             <Half>
                 <Label>End Time</Label>
-                <TimeInput setValue={ end_time => setTask({...task, end_time})} />
+                <TimeInput setValue={ end_time => setTask({...task, end_time})} value={ task.end_time } />
             </Half>
 
             <Full>
-                <Label> Date </Label>
-                <DateInput setValue={date => setTask({...task, date})} />
+                <Label>Date</Label>
+                <DateInput setValue={date => setTask({...task, date})} currentDate={ task.date }/>
             </Full>
         </MenuContainer>
     )

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import logo from './logo.svg'
 import './App.css'
@@ -15,10 +15,9 @@ import { setToken } from './actions/tokenActions'
 const App = ({ setTokenState, token }) => {
   useEffect(() => {
     setTokenState(localStorage.getItem('token'))
-  }, [token]);
+  }, []);
 
-  // update state with the token 
-  // get state and map to props, pass down props to Home 
+
   return (
     <Router>
       <Layout>

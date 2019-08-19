@@ -12,9 +12,9 @@ const input = css`
     outline: none;
 `
 
-const MenuInput = ({ setValue }) => {
+const MenuInput = ({ setValue, value }) => {
     return (
-        <input type="text" css={input} onChange={e => setValue(e.target.value)}/>
+        <input type="text" css={input} onChange={e => setValue(e.target.value)} value={ value }/>
     )
 }
 

@@ -24,17 +24,16 @@ const Image = styled.img`
     width: 120%;
 `
 
-const MenuButton = ({ showMenu }) => {
-    const [menuOpen, setMenuOpen] = useState(false)
+const MenuButton = ({ showMenu, menuToggled }) => {
+
     const handleClick = () => {
         showMenu()
-        setMenuOpen(!menuOpen)
     }
 
     useEffect(() => {
         const menu = document.querySelector('.menu-button');
-        if (menuOpen) TweenLite.to(menu, 0.4, { transform: 'rotate(-45deg)', ease:Power2.easeInOut });
-        if (!menuOpen) TweenLite.to(menu, 0.4, { transform: 'rotate(0deg)', ease:Power2.easeInOut });
+        if (menuToggled) TweenLite.to(menu, 0.4, { transform: 'rotate(-45deg)', ease:Power2.easeInOut });
+        if (!menuToggled) TweenLite.to(menu, 0.4, { transform: 'rotate(0deg)', ease:Power2.easeInOut });
     }, [showMenu]) 
 
     return (

@@ -61,15 +61,17 @@ const ButtonContainer = styled.div`
     cursor: pointer;
 `
 
-const TaskMenu = ({ token, getTasks, menuToggled }) => {
-    const [goalNumber, setGoalNum] = useState(1)
+const TaskMenu = ({ token, getTasks, menuToggled, currentTask, currentGoals, submitTask }) => {
+    const [goalNumber, setGoalNum] = useState(0)
     const [task, setTask] = useState({})
     const [goals, setGoals] = useState([])
     
     useEffect(() => {
-        const el = document.querySelector('.menu-container');
+        const el = document.querySelector('.task-menu-container');
         if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
+        if (currentTask) setTask(currentTask);
+        if (currentGoals) setGoals(currentGoals);
     }, [task, goals, goalNumber, menuToggled])
 
     const newGoalItem = () => {
@@ -78,15 +80,15 @@ const TaskMenu = ({ token, getTasks, menuToggled }) => {
 
     const handleSubmit = () => {
         if (task.title && goals.length > 0) {
-            api.createTasks(token, task, goals)
-            .then(getTasks(token))
+            submitTask(task, goals)
+            setTask({})
+            setGoals([])
         }
     }
 
     const addGoal = (goal) => {
         const goalExists = goals.find(g => g.id === goal.id)
-        // console.log(!!goalExists)
-        // console.log(goals)
+
         if (!!goalExists) {
             setGoals([
                 ...goals.filter(g => g.id !== goal.id),
@@ -101,7 +103,7 @@ const TaskMenu = ({ token, getTasks, menuToggled }) => {
     }
 
     return (
-        <Container className="menu-container">
+        <Container className="task-menu-container">
             <ItemsContainer>
                 <TaskItem setTask={ setTask } task={ task } />
                 <ButtonContainer>
@@ -109,6 +111,8 @@ const TaskMenu = ({ token, getTasks, menuToggled }) => {
                 </ButtonContainer>
 
                 { Array(goalNumber).fill('').map((n, i) => <GoalItem  setValue={ addGoal } key={i} goalId={i+1} />) }
+
+                { goals ? goals.map((goal, i) => <GoalItem goal={ goal.attributes }  setValue={ addGoal } key={i} goalId={i+1} />  ) : null }
 
                 <ButtonContainer>
                     <CreateButton onClick={ () => handleSubmit() }>Create</CreateButton>
@@ -125,10 +129,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getTasks: (token) => dispatch(userData(token))
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(TaskMenu)
+export default connect(mapStateToProps, null)(TaskMenu)

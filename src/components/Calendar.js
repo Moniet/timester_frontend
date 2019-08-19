@@ -6,7 +6,6 @@ import { daysInMonth, getMonth, formatTime } from '../utils/dateUtils'
 import Container from './Container'
 import { userData } from '../actions/userDataActions'
 import { Link } from 'react-router-dom'
-import Nav from './Nav'
 
 const Banner = styled.div`
     position: relative;
@@ -65,7 +64,8 @@ const Calendar = ({ tasks, dispatch }) => {
     let token = localStorage.getItem('token')
 
     useEffect(() => {
-        if (tasks.length === 0 && token !== 'false') dispatch(userData(localStorage.getItem('token')));
+        if (tasks.length === 0 && token !== 'false') 
+            dispatch(userData(localStorage.getItem('token')));
     })
 
     return (
@@ -92,7 +92,6 @@ const Calendar = ({ tasks, dispatch }) => {
                     } 
                 )}
             </Grid>
-            <Nav />
         </Container>
     )
 }

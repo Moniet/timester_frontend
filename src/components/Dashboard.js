@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { userData } from '../actions/userDataActions'
 import { colors, mq } from '../styles/theme'
+import api from '../adapters/api'
 
 import Container from '../components/Container'
 import TaskGrid from '../components/TaskGrid'
 import MenuButton from './MenuButton'
 import DashboardMessage from './DashboardMessage'
-import TaskMenu from './TaskMenu'
-import Nav from './Nav'
+import Menu from './Menu'
+import TaskMenu from './TaskMenu';
 
 const Banner = styled.div`
     position: relative;
@@ -37,14 +38,24 @@ const BannerHeader = styled.h1`
 
 const Dashboard = ({ loadUserData, token, tasks, goals }) => {
     const [menuToggled, toggleMenu] = useState(false)
+    const [taskMenuToggled, toggleTaskMenu] = useState(false)
 
     useEffect(() => {
         loadUserData(token)
     }, [])
 
     const showMenu = () => {
-        toggleMenu(!menuToggled)
+        if (taskMenuToggled && menuToggled) {
+            toggleTaskMenu(!taskMenuToggled)
+        } else {
+            toggleMenu(!menuToggled)
+        }
+        
     }
+
+    const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
+
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token));
     
     return (
         <Container>
@@ -52,11 +63,11 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
                 <Banner>
                     <BannerHeader className="banner-header">Home</BannerHeader>
                 </Banner>
-                <MenuButton showMenu={ showMenu } />
+                <MenuButton showMenu={ showMenu } menuToggled={ menuToggled }/>
             </BannerContainer>
-            <TaskMenu menuToggled={ menuToggled }/>
+            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu }/>
             { tasks.length > 0 ? <TaskGrid tasks={ tasks } /> : <DashboardMessage message="CLICK THE MENU TO CREATE TASKS" />}
-            <Nav />
+            <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask }/>
         </Container>
     ) 
 }

@@ -68,12 +68,10 @@ const Task = ({ task }) => {
 
     useEffect(() => {
         const height = taskDiv.current.clientHeight + taskTime.current.clientHeight + 8;
-        rowSpan = Math.ceil(height / (getGridSize() + 8))
-        console.log(getGridSize());
-        
+        rowSpan = Math.ceil(height / (getGridSize() + 8))        
         taskContainer.current.style.gridRowEnd = `span ${rowSpan}`
         backdrop.current.src = rowSpan > 2 ? require('../assets/img/large-task-gradient.svg') : require('../assets/img/small-task-gradient.svg')
-    })
+    }, [])
 
     return (
         <div css={container}ref={taskContainer}>
