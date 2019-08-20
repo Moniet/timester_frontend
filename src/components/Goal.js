@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
 import { formatToHours, formatTime } from '../utils/dateUtils'
+import { getCurrentTime } from '../utils/timeUtils';
 
 const Container = styled.div`
     grid-column-end: span 2;
@@ -74,7 +75,8 @@ const TimelineContainer = styled.div`
     height: 100%;
 `
 
-const Goal = ({ goal, time, animateRiver }) => {
+const Goal = ({ goal, animateRiver }) => {
+    const [time, setTime] = useState()
     const { hour, minutes, seconds } = time
     const currentTime = `${formatTime(hour)}:${formatTime(minutes)}`
     const startHour = formatToHours(goal.attributes.start_time)
@@ -89,6 +91,10 @@ const Goal = ({ goal, time, animateRiver }) => {
     const titleBackground = hourBool ? colors.primary : '#FFFDE4'
 
     if (hourBool) animateRiver(duration, timeElapsed);
+
+    useEffect(() => {
+        setTimeout(() => setTime(getCurrentTime(), 1000))
+    }, [time])
     
     return (
         <Container gridRowTemplate={rowTemplate}>

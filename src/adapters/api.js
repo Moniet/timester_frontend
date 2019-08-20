@@ -78,5 +78,6 @@ export default {
     login,
     registerUser,
     getTasks,
-    createTasks
+    createTasks,
+    editTask
 }

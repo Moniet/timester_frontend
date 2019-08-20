@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { userData } from '../actions/userDataActions'
 import api from '../adapters/api'
 import { TweenLite } from "gsap/TweenMax"
+import { log } from 'util';
 
 const Container = styled.div`
     position: absolute;
@@ -70,8 +71,8 @@ const TaskMenu = ({ token, getTasks, menuToggled, currentTask, currentGoals, sub
         const el = document.querySelector('.task-menu-container');
         if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
-        if (currentTask) setTask(currentTask);
-        if (currentGoals) setGoals(currentGoals);
+        if (JSON.stringify(currentTask) !== JSON.stringify(task)) setTask({...task, ...currentTask});
+        if (currentGoals && goals.length === 0) setGoals(...goals, currentGoals);
     }, [task, goals, goalNumber, menuToggled])
 
     const newGoalItem = () => {

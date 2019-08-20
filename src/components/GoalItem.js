@@ -37,7 +37,7 @@ const GoalItem = ({ setValue, goal }) => {
         if (title !== '' && startTime !== '' && endTime !== '') {
             setValue({ title, start_time: startTime, end_time: endTime })            
         }
-    }, [title, startTime, endTime]);
+    }, [title, startTime, endTime]);    
 
     return (
         <MenuContainer>
