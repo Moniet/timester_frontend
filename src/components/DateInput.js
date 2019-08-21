@@ -17,6 +17,9 @@ const select = css`
     margin-top: 0.25rem;
     background: transparent;
     outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
 `
 
 const Label = styled.label`
@@ -47,21 +50,21 @@ const DateInput = ({ setValue, currentDate }) => {
         <Container>
             <div>
                 <Label>dd/ </Label>
-                <select onChange={e => setDay(e.target.value)} value={ dateArr[2] }>
+                <select css={select} onChange={e => setDay(e.target.value)} value={ dateArr[2] }>
                     { days.map((d, i) => <option value={ i + 1 } key={ i }>{ i + 1 }</option>) }
                 </select>
             </div>
 
             <div>
                 <Label>mm/ </Label>
-                <select onChange={e => setMonth(e.target.value) } value={ dateArr[1] }>
+                <select css={select}  onChange={e => setMonth(e.target.value) } value={ dateArr[1] }>
                     { months.map((m, i) => <option value={ i + 1 } key={ i }>{ i + 1 }</option>) }
                 </select>
             </div>
 
             <div>
                 <Label>yy</Label>
-                <select onChange={e => setYear(e.target.value) } value={ dateArr[0] }>
+                <select css={select}  onChange={e => setYear(e.target.value) } value={ dateArr[0] }>
                     { years.map((y, i) => <option value={ i + 1 } key={ i }>{ y }</option>) }
                 </select>
             </div>

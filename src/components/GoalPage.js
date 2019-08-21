@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
-import { formatTime} from '../utils/dateUtils'
+import { formatTime } from '../utils/dateUtils'
 import { userData } from '../actions/userDataActions'
 import { getCurrentTime } from '../utils/timeUtils'
 import api from '../adapters/api'
@@ -13,6 +13,7 @@ import Goal from './Goal'
 import MenuButton from './MenuButton'
 import Menu from './Menu'
 import TaskMenu from './TaskMenu';
+import EditMenu from './EditMenu';
 import GoalPageBanner from './GoalPageBanner'
 
 const Banner = styled.div`
@@ -48,10 +49,11 @@ const ButtonContainer = styled.div`
 const GoalPage = ({ match, goals, tasks, loadUserData}) => {
     let token = localStorage.getItem('token')
     let allGoals; 
-    let river = document.querySelector('#river-front')
+    let river;
     let time = getCurrentTime();
     const [menuToggled, toggleMenu] = useState(false)
     const [taskMenuToggled, toggleTaskMenu] = useState(false)
+    const [editMenuToggled, toggleEditMenu] = useState(false)
     let id = match.params.id; 
     let task = {}; 
 
@@ -59,23 +61,33 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
         allGoals = goals.filter(goal => parseInt(goal.attributes.task_id) === parseInt(match.params.id))
     }
 
-    if (!!tasks) {
+    if (tasks) {
         task = tasks.find(t => parseInt(t.id) === parseInt(id));
     }
     
     useEffect(() => {
         if (goals.length === 0 && token !== 'false') loadUserData(localStorage.getItem('token'));
+        river = document.querySelector('#river-front')
     }, [goals, tasks, match])
 
     const showMenu = () => {
-        if (taskMenuToggled && menuToggled) {
+        if (taskMenuToggled) {
             toggleTaskMenu(!taskMenuToggled)
-        } else {
+        } else if (editMenuToggled)  {
+            toggleEditMenu(!editMenuToggled)
+        }
+        else {
             toggleMenu(!menuToggled)
         }
     }
 
+    // find the task 
+    // provide the tasks
+
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
+    const showEditMenu = () => toggleEditMenu(!editMenuToggled)
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token));    
+
     const editCurrentTask = (newTask, goals) => {
         newTask.id = task.id
         api.editTask(token, newTask, goals).then(loadUserData(token))
@@ -96,10 +108,11 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
             <ButtonContainer>
                 <MenuButton showMenu={ showMenu } menuToggled={ menuToggled } />
             </ButtonContainer>
-            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } editMenu={ true } />
-            <TaskMenu menuToggled={ taskMenuToggled } submitTask={ editCurrentTask } currentTask={ task } currentGoals={ allGoals } />
+            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } showEditMenu={ showEditMenu } editMenu={ true } />
+            <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask } />
+            <EditMenu menuToggled={ editMenuToggled } submitTask={ editCurrentTask } currentTask={ task } currentGoals={ allGoals } />
             <Grid>
-                { allGoals ? allGoals.map((goal, i) => <Goal key={ i } goal={ goal } time={ time } animateRiver={ animateRiver } />) : '' }
+                { allGoals ? allGoals.map((goal, i) => <Goal key={ i } goal={ goal } animateRiver={ animateRiver } />) : '' }
             </Grid>
         </Container>
     )

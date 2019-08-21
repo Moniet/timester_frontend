@@ -76,7 +76,7 @@ const TimelineContainer = styled.div`
 `
 
 const Goal = ({ goal, animateRiver }) => {
-    const [time, setTime] = useState()
+    const [time, setTime] = useState(getCurrentTime())
     const { hour, minutes, seconds } = time
     const currentTime = `${formatTime(hour)}:${formatTime(minutes)}`
     const startHour = formatToHours(goal.attributes.start_time)
@@ -90,10 +90,10 @@ const Goal = ({ goal, animateRiver }) => {
     const hourBool = currentTime > startHour && currentTime < endHour
     const titleBackground = hourBool ? colors.primary : '#FFFDE4'
 
-    if (hourBool) animateRiver(duration, timeElapsed);
+    if (hourBool) animateRiver(duration, timeElapsed);    
 
     useEffect(() => {
-        setTimeout(() => setTime(getCurrentTime(), 1000))
+        setTimeout(() => setTime(getCurrentTime()), 1000)
     }, [time])
     
     return (

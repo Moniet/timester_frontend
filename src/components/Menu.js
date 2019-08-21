@@ -39,11 +39,7 @@ const List = styled.ul`
     }
 `
 
-const showEditMenu = () => {
-    return
-}
-
-const Menu = ({ menuToggled, showTaskMenu, editMenu }) => {
+const Menu = ({ menuToggled, showTaskMenu, showEditMenu, editMenu }) => {
 
     useEffect(() => {
         const el = document.querySelector('.menu-container');

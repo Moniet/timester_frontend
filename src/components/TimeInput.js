@@ -11,19 +11,18 @@ const select = css`
     margin-top: 0.25rem;
     background: transparent;
     outline: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    color: black;
 `
 
 const DateInput = ({ setValue, value }) => {
-    let times = generateTimes();
-    let input = useRef();
-
-    useEffect(() => {
-        input.current.value = value
-    }, [input])
+    let times = generateTimes();    
 
     return (
-        <select css={select} onChange={e => setValue(e.target.value)} ref={input}>
-            { times.map(t => <option value={ t }>{ t }</option>) }
+        <select css={select} onChange={e => setValue(e.target.value)}>
+            { times.map(t => <option> {t} </option>) }
         </select>
     )
 }

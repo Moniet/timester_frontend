@@ -50,12 +50,11 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
         } else {
             toggleMenu(!menuToggled)
         }
-        
     }
 
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
 
-    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token));
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token))
     
     return (
         <Container>

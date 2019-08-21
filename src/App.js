@@ -16,8 +16,7 @@ const App = ({ setTokenState, token }) => {
   useEffect(() => {
     setTokenState(localStorage.getItem('token'))
   }, []);
-
-
+  
   return (
     <Router>
       <Layout>

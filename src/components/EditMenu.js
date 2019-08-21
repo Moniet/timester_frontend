@@ -62,16 +62,20 @@ const ButtonContainer = styled.div`
     cursor: pointer;
 `
 
-const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
+const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask }) => {
     const [goalNumber, setGoalNum] = useState(1)
     const [task, setTask] = useState({})
-    const [goals, setGoals] = useState([])
+    const [goals, setGoals] = useState(null)
     
     useEffect(() => {
         const el = document.querySelector('.task-menu-container');
         if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
+        if (Object.keys(task).length === 0) setTask({...currentTask })
+        // if (!goals) setGoals([...currentGoals]);
     }, [task, goals, goalNumber, menuToggled])
+
+    console.log(menuToggled)
 
     const newGoalItem = () => {
         setGoalNum(goalNumber + 1)
@@ -104,13 +108,13 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
     return (
         <Container className="task-menu-container">
             <ItemsContainer>
-                <h1>NEW TASK</h1>
+                <h1>EDIT TASK</h1>
                 <TaskItem setTask={ setTask } task={ task } />
                 <ButtonContainer>
                     <AddGoalButton onClick={ () => newGoalItem()}>Add Goal</AddGoalButton>
                 </ButtonContainer>
 
-                { Array(goalNumber).fill('').map((n, i) => <GoalItem  setValue={ addGoal } key={i} goalId={i+1} />) }
+                { Array(goalNumber).fill('').map((n, i) => <GoalItem  setValue={ addGoal } key={ i } goalId={ i+1 } />) }
 
                 <ButtonContainer>
                     <CreateButton onClick={ () => handleSubmit() }>Create</CreateButton>
@@ -127,4 +131,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(TaskMenu)
+export default connect(mapStateToProps, null)(EditMenu)

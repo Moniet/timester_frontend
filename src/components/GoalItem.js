@@ -28,14 +28,14 @@ const Label = styled.label`
     color: black;
 `
 
-const GoalItem = ({ setValue, goal }) => {
+const GoalItem = ({ setValue, goal, goalId }) => {
     const [title, setTitle] = useState('')
     const [startTime, setStartTime] = useState('')
     const [endTime, setEndTime] = useState('')
 
     useEffect(() => {
         if (title !== '' && startTime !== '' && endTime !== '') {
-            setValue({ title, start_time: startTime, end_time: endTime })            
+            setValue({id: goalId, title, start_time: startTime, end_time: endTime })            
         }
     }, [title, startTime, endTime]);    
 
@@ -43,7 +43,7 @@ const GoalItem = ({ setValue, goal }) => {
         <MenuContainer>
             <Full>
                 <Label>Goal Title</Label>
-                <MenuInput setValue={setTitle} value={ goal ? goal.title : ''}/>
+                <MenuInput setValue={setTitle}/>
             </Full>
 
             <Half>

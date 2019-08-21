@@ -36,12 +36,14 @@ const textCenter = css`
 `
 
 const TaskItem = ({ task, setTask }) => {
+    
     const taskExist = (Object.keys(task).length !== 0)
+    
     return (
         <MenuContainer>
             <Full>
                 <Label css={textCenter}>Task Title</Label>
-                <MenuInput setValue={ title => setTask({...task, title})} value={  taskExist ? task.attributes.title : ''} />
+                <MenuInput setValue={ title => setTask({...task, title})} value={  taskExist ? task.title : ''} />
             </Full>
 
             <Half>
