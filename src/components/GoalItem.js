@@ -40,7 +40,7 @@ const GoalItem = ({ setValue, goal, goalId }) => {
         }
     }, [title, startTime, endTime]);    
 
-    console.log(goal);
+    if (goal) console.log(formatToHours(goal.start_time))
     
 
     return (
@@ -52,12 +52,12 @@ const GoalItem = ({ setValue, goal, goalId }) => {
 
             <Half>
                 <Label>Start Time</Label>
-                <TimeInput setValue={setStartTime}/>
+                <TimeInput setValue={setStartTime} value={ goal ? goal.start_time : '' } />
             </Half>
 
             <Half>
                 <Label>End Time</Label>
-                <TimeInput setValue={setEndTime}/>
+                <TimeInput setValue={setEndTime} value={ goal ? goal.end_time : '' }/>
             </Half>
         </MenuContainer>
     )

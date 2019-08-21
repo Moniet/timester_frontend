@@ -41,6 +41,7 @@ const TaskItem = ({ task, setTask }) => {
 
     // get the task value (x)
     // assign the values to each input  (x)
+    if (taskExist) console.log(task.start_time)
     
     return (
         <MenuContainer>

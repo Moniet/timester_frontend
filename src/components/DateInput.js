@@ -45,14 +45,6 @@ const DateInput = ({ setValue, currentDate }) => {
         setValue(`${year}-${month}-${day}`)
     }, [day, month, year]);
 
-    console.log(`
-        dateArr: ${dateArr}
-        years: ${years}
-        day: ${day}
-        month: ${month}
-        year: ${year}        
-    `)
-    
     return (
         <Container>
             {/* DAYS */}
