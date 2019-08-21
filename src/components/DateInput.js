@@ -37,35 +37,43 @@ const DateInput = ({ setValue, currentDate }) => {
     const [day, setDay] = useState(1)
     const [month, setMonth] = useState(1)
     const [year, setYear] = useState(currentYear)
-    const dateArr = (currentDate && !day && !month && !!year) ? currentDate.split('-') : '';
+    const dateArr = currentDate ? currentDate.split('-') : [];
 
     let days = Array(daysInMonth(month, currentYear)).fill('')
-
+    
     useEffect(() => {
         setValue(`${year}-${month}-${day}`)
-        console.log(currentDate);
     }, [day, month, year]);
 
+    console.log(`
+        dateArr: ${dateArr}
+        years: ${years}
+        day: ${day}
+        month: ${month}
+        year: ${year}        
+    `)
+    
     return (
         <Container>
-            <div>
+            {/* DAYS */}
+            <div> 
                 <Label>dd/ </Label>
-                <select css={select} onChange={e => setDay(e.target.value)} value={ dateArr[2] }>
-                    { days.map((d, i) => <option value={ i + 1 } key={ i }>{ i + 1 }</option>) }
+                <select css={select} onChange={e => setDay(e.target.value)}>
+                    { days.map((d, i) => <option value={ i + 1 } key={ i } selected={ parseInt(i + 1) === parseInt(dateArr[2]) }> { i + 1 } </option>) }
                 </select>
             </div>
-
+            {/* MONTH */}
             <div>
                 <Label>mm/ </Label>
                 <select css={select}  onChange={e => setMonth(e.target.value) } value={ dateArr[1] }>
-                    { months.map((m, i) => <option value={ i + 1 } key={ i }>{ i + 1 }</option>) }
+                    { months.map((m, i) => <option value={ i + 1 } key={ i } selected={ parseInt(i + 1) === parseInt(dateArr[1]) }>{ i + 1 }</option>) }
                 </select>
             </div>
-
+            {/* YEAR */}
             <div>
                 <Label>yy</Label>
                 <select css={select}  onChange={e => setYear(e.target.value) } value={ dateArr[0] }>
-                    { years.map((y, i) => <option value={ i + 1 } key={ i }>{ y }</option>) }
+                    { years.map((y, i) => <option value={ y } key={ i } selected={ parseInt(y) === parseInt(dateArr[0]) }>{ y }</option>) }
                 </select>
             </div>
         </Container>

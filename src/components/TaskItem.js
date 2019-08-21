@@ -38,27 +38,30 @@ const textCenter = css`
 const TaskItem = ({ task, setTask }) => {
     
     const taskExist = (Object.keys(task).length !== 0)
+
+    // get the task value (x)
+    // assign the values to each input  (x)
     
     return (
         <MenuContainer>
             <Full>
                 <Label css={textCenter}>Task Title</Label>
-                <MenuInput setValue={ title => setTask({...task, title})} value={  taskExist ? task.title : ''} />
+                <MenuInput setValue={ title => setTask({...task, title})} value={ taskExist ? task.title : '' } />
             </Full>
 
             <Half>
                 <Label>Start Time</Label>
-                <TimeInput setValue={ start_time => setTask({...task, start_time}) } value={ taskExist ? task.start_time : ''} />
+                <TimeInput setValue={ start_time => setTask({...task, start_time}) } value={ taskExist ? task.start_time : '' } />
             </Half>
                 
             <Half>
                 <Label>End Time</Label>
-                <TimeInput setValue={ end_time => setTask({...task, end_time})} value={ taskExist ? task.end_time : ''} />
+                <TimeInput setValue={ end_time => setTask({...task, end_time})} value={ taskExist ? task.end_time : '' } />
             </Half>
 
             <Full>
                 <Label>Date</Label>
-                <DateInput setValue={date => setTask({...task, date})} currentDate={ taskExist ? task.date : ''}/>
+                <DateInput setValue={date => setTask({...task, date})} currentDate={ taskExist ? task.date : '' }/>
             </Full>
         </MenuContainer>
     )

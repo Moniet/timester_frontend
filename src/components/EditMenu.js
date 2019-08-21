@@ -63,19 +63,17 @@ const ButtonContainer = styled.div`
 `
 
 const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask }) => {
-    const [goalNumber, setGoalNum] = useState(1)
+    const [goalNumber, setGoalNum] = useState(0)
     const [task, setTask] = useState({})
     const [goals, setGoals] = useState(null)
     
     useEffect(() => {
-        const el = document.querySelector('.task-menu-container');
+        const el = document.querySelector('.edit-menu-container');
         if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
         if (Object.keys(task).length === 0) setTask({...currentTask })
-        // if (!goals) setGoals([...currentGoals]);
+        if (!goals) setGoals([...currentGoals]);
     }, [task, goals, goalNumber, menuToggled])
-
-    console.log(menuToggled)
 
     const newGoalItem = () => {
         setGoalNum(goalNumber + 1)
@@ -106,7 +104,7 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
     }
 
     return (
-        <Container className="task-menu-container">
+        <Container className="edit-menu-container">
             <ItemsContainer>
                 <h1>EDIT TASK</h1>
                 <TaskItem setTask={ setTask } task={ task } />
@@ -114,10 +112,12 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
                     <AddGoalButton onClick={ () => newGoalItem()}>Add Goal</AddGoalButton>
                 </ButtonContainer>
 
-                { Array(goalNumber).fill('').map((n, i) => <GoalItem  setValue={ addGoal } key={ i } goalId={ i+1 } />) }
+                { Array(goalNumber).fill('').map((n, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ i+1 } />) }
+
+                { currentGoals ? currentGoals.map((goal, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ i+1 } goal={ goal.attributes } />) : '' }
 
                 <ButtonContainer>
-                    <CreateButton onClick={ () => handleSubmit() }>Create</CreateButton>
+                    <CreateButton onClick={ () => handleSubmit() }>Update Task</CreateButton>
                 </ButtonContainer> 
             </ItemsContainer>
         </Container>

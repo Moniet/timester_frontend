@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import MenuInput from './MenuInput'
 import TimeInput from './TimeInput'
+import { formatToHours } from '../utils/dateUtils'
 
 const MenuContainer = styled.div`
     position: relative;
@@ -39,11 +40,14 @@ const GoalItem = ({ setValue, goal, goalId }) => {
         }
     }, [title, startTime, endTime]);    
 
+    console.log(goal);
+    
+
     return (
         <MenuContainer>
             <Full>
                 <Label>Goal Title</Label>
-                <MenuInput setValue={setTitle}/>
+                <MenuInput setValue={setTitle} value={ goal ? goal.title : '' }/>
             </Full>
 
             <Half>

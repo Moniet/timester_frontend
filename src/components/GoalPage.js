@@ -61,8 +61,8 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
         allGoals = goals.filter(goal => parseInt(goal.attributes.task_id) === parseInt(match.params.id))
     }
 
-    if (tasks) {
-        task = tasks.find(t => parseInt(t.id) === parseInt(id));
+    if (tasks.length !== 0) {
+        task = tasks.find(t => parseInt(t.id) === parseInt(id)).attributes;   
     }
     
     useEffect(() => {
@@ -81,16 +81,15 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
         }
     }
 
-    // find the task 
-    // provide the tasks
-
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
     const showEditMenu = () => toggleEditMenu(!editMenuToggled)
     const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token));    
 
     const editCurrentTask = (newTask, goals) => {
-        newTask.id = task.id
-        api.editTask(token, newTask, goals).then(loadUserData(token))
+        // newTask.id = task.id
+        // api.editTask(token, newTask, goals).then(loadUserData(token))
+        console.log(newTask);
+        console.log(goals);
     }
 
     const animateRiver = (duration, timeElapsed) => { // these values are in seconds 

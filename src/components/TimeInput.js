@@ -2,7 +2,8 @@
 import { jsx, css } from '@emotion/core'
 import styled from '@emotion/styled'
 import React, {useEffect, useRef} from 'react'
-import { generateTimes } from '../utils/dateUtils'
+import { generateTimes, formatToHours } from '../utils/dateUtils'
+
 
 const select = css`
     border: none;
@@ -22,7 +23,7 @@ const DateInput = ({ setValue, value }) => {
 
     return (
         <select css={select} onChange={e => setValue(e.target.value)}>
-            { times.map(t => <option> {t} </option>) }
+            { times.map(t => <option value={t} selected={formatToHours(value) === t}> {t} </option>) }
         </select>
     )
 }
