@@ -27,7 +27,7 @@ const ItemsContainer = styled.div`
     position: absolute;
     top: 40%;
     width: 90%;
-    margin: 0 auto;
+    margin: 20vw auto;
 `
 
 const AddGoalButton = styled.button`
@@ -80,7 +80,7 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
     const handleSubmit = () => {
         if (task.title && goals.length > 0) {
             submitTask(task, goals)
-            setTask({})
+            setTask({title: '', start_time: '', end_time: ''})
             setGoals([])
         }
     }
@@ -106,7 +106,7 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
             <ItemsContainer>
                 <TaskItem setTask={ setTask } task={ task } />
                 <ButtonContainer>
-                    <AddGoalButton onClick={ () => newGoalItem()}>Add Goal</AddGoalButton>
+                    <AddGoalButton onClick={() => newGoalItem()}>Add Goal</AddGoalButton>
                 </ButtonContainer>
 
                 { Array(goalNumber).fill('').map((n, i) => <GoalItem  setValue={ addGoal } key={i} goalId={i+1} />) }

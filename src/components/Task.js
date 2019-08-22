@@ -18,7 +18,6 @@ const container = css`
     ${mq[0]} {
         border-radius: ${styles.borderRadius};
         padding: 0.75em;
-        word-break: break-all;
     }
 
     &:hover {

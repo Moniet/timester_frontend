@@ -36,7 +36,7 @@ const BannerHeader = styled.h1`
   transform: translate(-50%, -50%);
 `
 
-const Dashboard = ({ getUserData, token, tasks, goals }) => {
+const Dashboard = ({ getUserData, getData, token, tasks, goals }) => {
     const [menuToggled, toggleMenu] = useState(false)
     const [taskMenuToggled, toggleTaskMenu] = useState(false)
 
@@ -53,8 +53,7 @@ const Dashboard = ({ getUserData, token, tasks, goals }) => {
     }
 
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
-
-    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(getUserData(token))
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(res => getData(res.tasks.data, res.goals.data))
     
     return (
         <Container>

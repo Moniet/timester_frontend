@@ -54,7 +54,7 @@ const getTasks = (token) => {
         goals: goals
       }
     })
- })
+ }).then(res => res.json())
 }
 
 const editTask = (token, task, goals, id) => {

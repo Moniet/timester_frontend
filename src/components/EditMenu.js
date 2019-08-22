@@ -26,7 +26,7 @@ const ItemsContainer = styled.div`
     position: absolute;
     top: 40%;
     width: 90%;
-    margin: 0rem auto;
+    margin: 15vw auto;
 `
 
 const AddGoalButton = styled.button`

@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core'
 import { colors } from '../styles/theme'
+import React from 'react'
 
 const container = css`
     position: relative;
