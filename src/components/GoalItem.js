@@ -29,35 +29,30 @@ const Label = styled.label`
     color: black;
 `
 
+
 const GoalItem = ({ setValue, goal, goalId }) => {
-    const [title, setTitle] = useState('')
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
+    const [currentGoal, setGoal] = useState({id: goalId, ...goal});    
 
-    useEffect(() => {
-        if (title !== '' && startTime !== '' && endTime !== '') {
-            setValue({id: goalId, title, start_time: startTime, end_time: endTime })            
-        }
-    }, [title, startTime, endTime]);    
-
-    if (goal) console.log(formatToHours(goal.start_time))
-    
+    const updateGoal = (goal) => {
+        setGoal(goal)
+        setValue(goal)
+    }
 
     return (
         <MenuContainer>
             <Full>
                 <Label>Goal Title</Label>
-                <MenuInput setValue={setTitle} value={ goal ? goal.title : '' }/>
+                <MenuInput setValue={title => updateGoal({...currentGoal, title })} value={ currentGoal.title }/>
             </Full>
 
             <Half>
                 <Label>Start Time</Label>
-                <TimeInput setValue={setStartTime} value={ goal ? goal.start_time : '' } />
+                <TimeInput setValue={start_time => updateGoal({ ...currentGoal, start_time })} value={ currentGoal.start_time } />
             </Half>
 
             <Half>
                 <Label>End Time</Label>
-                <TimeInput setValue={setEndTime} value={ goal ? goal.end_time : '' }/>
+                <TimeInput setValue={end_time => updateGoal({ ...currentGoal, end_time })} value={ currentGoal.end_time }/>
             </Half>
         </MenuContainer>
     )

@@ -15,6 +15,7 @@ import Menu from './Menu'
 import TaskMenu from './TaskMenu';
 import EditMenu from './EditMenu';
 import GoalPageBanner from './GoalPageBanner'
+import { log } from 'util';
 
 const Banner = styled.div`
     position: relative;
@@ -44,6 +45,10 @@ const ButtonContainer = styled.div`
     margin-bottom: 6rem;
     width: 25%;
     margin-left: auto;
+`
+
+const positionMenu = css`
+    margin-top: 4rem;
 `
 
 const GoalPage = ({ match, goals, tasks, loadUserData}) => {
@@ -85,11 +90,10 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
     const showEditMenu = () => toggleEditMenu(!editMenuToggled)
     const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token));    
 
-    const editCurrentTask = (newTask, goals) => {
-        // newTask.id = task.id
+    const editCurrentTask = (newTask, newGoals) => {
         // api.editTask(token, newTask, goals).then(loadUserData(token))
-        console.log(newTask);
-        console.log(goals);
+        console.log(newTask)
+        console.log(newGoals)
     }
 
     const animateRiver = (duration, timeElapsed) => { // these values are in seconds 
@@ -108,8 +112,8 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
                 <MenuButton showMenu={ showMenu } menuToggled={ menuToggled } />
             </ButtonContainer>
             <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } showEditMenu={ showEditMenu } editMenu={ true } />
-            <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask } />
-            <EditMenu menuToggled={ editMenuToggled } submitTask={ editCurrentTask } currentTask={ task } currentGoals={ allGoals } />
+            <TaskMenu css={ positionMenu } menuToggled={ taskMenuToggled } submitTask={ submitTask } />
+            <EditMenu css={ positionMenu } menuToggled={ editMenuToggled } submitTask={ editCurrentTask } currentTask={ task } currentGoals={ allGoals } />
             <Grid>
                 { allGoals ? allGoals.map((goal, i) => <Goal key={ i } goal={ goal } animateRiver={ animateRiver } />) : '' }
             </Grid>

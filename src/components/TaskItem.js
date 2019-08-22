@@ -38,10 +38,6 @@ const textCenter = css`
 const TaskItem = ({ task, setTask }) => {
     
     const taskExist = (Object.keys(task).length !== 0)
-
-    // get the task value (x)
-    // assign the values to each input  (x)
-    if (taskExist) console.log(task.start_time)
     
     return (
         <MenuContainer>

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
@@ -6,11 +6,16 @@ import { daysInMonth, getMonth, formatTime } from '../utils/dateUtils'
 import Container from './Container'
 import { userData } from '../actions/userDataActions'
 import { Link } from 'react-router-dom'
+import MenuButton from './MenuButton'
+import Menu from './Menu'
+import TaskMenu from './TaskMenu'
+import api from '../adapters/api'
 
 const Banner = styled.div`
     position: relative;
     width: 100%;
     margin-bottom: 5rem;
+    z-index: 1000;
 `
 
 const BannerContainer = styled.div`
@@ -56,17 +61,31 @@ const Day = styled.div`
 // render calendar based on the current month 
 // click on any of them to render the task page for that day
 
-const Calendar = ({ tasks, dispatch }) => {
+const Calendar = ({ tasks, dispatch, loadUserData }) => {
     const date = new Date()
     const year = date.getFullYear()
     const month = date.getMonth()
     const daysNum = daysInMonth(month, year)
     let token = localStorage.getItem('token')
+    const [menuToggled, toggleMenu] = useState(false)
+    const [taskMenuToggled, toggleTaskMenu] = useState(false)
 
     useEffect(() => {
         if (tasks.length === 0 && token !== 'false') 
-            dispatch(userData(localStorage.getItem('token')));
+            loadUserData(localStorage.getItem('token'));
     })
+
+    const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token))
+
+
+    const showMenu = () => {
+        if (taskMenuToggled && menuToggled) {
+            toggleTaskMenu(!taskMenuToggled)
+        } else {
+            toggleMenu(!menuToggled)
+        }
+    }
 
     return (
         <Container>
@@ -77,9 +96,10 @@ const Calendar = ({ tasks, dispatch }) => {
                     </SvgContainer>
                     <BannerHeader className="banner-header">{ getMonth(month) }</BannerHeader>
                 </Banner>
-                {/* <MenuButton showMenu={ showMenu } /> */}
             </BannerContainer>
-            {/* <TaskMenu menuToggled={ menuToggled }/> */}
+            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu }/>
+            <MenuButton showMenu={ showMenu } menuToggled={ menuToggled }/>
+            <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask }/>
             <Grid>
                 { Array(daysNum).fill('').map((n, i) => {
                     return ( 
@@ -103,7 +123,13 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, null)(Calendar)
+const mapDispatchToProps = dispatch => {
+    return {
+        loadUserData: token => dispatch(userData(token))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Calendar)
 
 
  

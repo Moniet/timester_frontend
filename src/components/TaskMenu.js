@@ -104,7 +104,6 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
     return (
         <Container className="task-menu-container">
             <ItemsContainer>
-                <h1>NEW TASK</h1>
                 <TaskItem setTask={ setTask } task={ task } />
                 <ButtonContainer>
                     <AddGoalButton onClick={ () => newGoalItem()}>Add Goal</AddGoalButton>
