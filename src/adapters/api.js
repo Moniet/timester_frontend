@@ -1,4 +1,4 @@
-const baseUrl = 'https://timester.herokuapp.com/';
+const baseUrl = 'https://timester.herokuapp.com';
 
 const login = (user) => {
     return fetch(`${baseUrl}/login`, {
