@@ -28,14 +28,14 @@ const TaskGrid = ({ tasks }) => {
         return dates.reverse().map((date, i) => {
             let allTasks = tasks.filter(tasks => tasks.attributes.date === date)
             return (
-                <> 
+                <React.Fragment key={i}> 
                     <DateHeader key={i}>
                         <Link to={`/tasks/${date}`} >
                             { readableDate(date) }
                         </Link>
                     </DateHeader>
                     { allTasks.map(task => <Task task={ task } key={ parseInt(task.id) } />) }
-                </>
+                </React.Fragment>
             )
         })
     }

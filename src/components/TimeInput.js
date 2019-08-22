@@ -23,7 +23,7 @@ const DateInput = ({ setValue, value }) => {
 
     return (
         <select css={select} onChange={e => setValue(e.target.value)}>
-            { times.map(t => <option value={t} selected={ formatToHours(value) === t}> {t} </option>) }
+            { times.map((t, i) => <option key={i} value={t} selected={ formatToHours(value) === t}> {t} </option>) }
         </select>
     )
 }

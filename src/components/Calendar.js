@@ -49,15 +49,24 @@ const Grid  = styled.div`
 `
 
 const Day = styled.div`
+    position: relative;
     padding: 0.5rem;
     border: solid 1px white;
-    width: 40px;
-    height: 40px;
+    width: 100%;
+    height: 100%;
     text-align: center;
     background: rgba(0,0,0,0.15);
     a {
+        position: absolute;
         color: white;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
+`
+
+const button = css`
+    margin-bottom: -1rem;
 `
 
 const Calendar = ({ tasks, dispatch, loadUserData }) => {
@@ -78,10 +87,6 @@ const Calendar = ({ tasks, dispatch, loadUserData }) => {
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
     const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token))
 
-    // const taskDates = tasks.map(task => task.attributes.date)
-    // const highlightCurrentDate = (calDay, calMonth) => (calDay === currentDay && calMonth === month)
-
-
     const showMenu = () => {
         if (taskMenuToggled && menuToggled) {
             toggleTaskMenu(!taskMenuToggled)
@@ -101,7 +106,7 @@ const Calendar = ({ tasks, dispatch, loadUserData }) => {
                 </Banner>
             </BannerContainer>
             <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu }/>
-            <MenuButton showMenu={ showMenu } menuToggled={ menuToggled }/>
+            <MenuButton css={button}  showMenu={ showMenu } menuToggled={ menuToggled }/>
             <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask }/>
             <Grid>
                 { Array(daysNum).fill('').map((n, i) => {

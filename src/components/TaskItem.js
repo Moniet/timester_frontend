@@ -37,7 +37,9 @@ const textCenter = css`
 
 const TaskItem = ({ task, setTask }) => {
     
-    const taskExist = (Object.keys(task).length !== 0)
+    const taskExist = (Object.keys(task).length > 1)
+    let val = taskExist ? task.start_time : '00:00'
+    console.log(task)
     
     return (
         <MenuContainer>
@@ -48,12 +50,12 @@ const TaskItem = ({ task, setTask }) => {
 
             <Half>
                 <Label>Start Time</Label>
-                <TimeInput setValue={ start_time => setTask({...task, start_time}) } value={ taskExist ? task.start_time : '' } />
+                <TimeInput setValue={ start_time => setTask({...task, start_time}) } value={ taskExist ? task.start_time : '00:00' } />
             </Half>
                 
             <Half>
                 <Label>End Time</Label>
-                <TimeInput setValue={ end_time => setTask({...task, end_time})} value={ taskExist ? task.end_time : '' } />
+                <TimeInput setValue={ end_time => setTask({...task, end_time})} value={ taskExist ? task.end_time : '00:00' } />
             </Half>
 
             <Full>
