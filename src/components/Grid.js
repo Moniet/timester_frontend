@@ -15,6 +15,7 @@ const GridContainer = styled.div`
         grid-auto-rows: ${ gridSize.sm }px;
         width: 100%;
         grid-gap: 1rem;
+        padding: 1rem;
     }
 
     ${mq[1]} {
