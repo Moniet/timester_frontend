@@ -2,6 +2,8 @@ import React, {useEffect } from 'react'
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
 import { TweenLite } from "gsap/TweenMax"
+import logoutUser from '../actions/userActions'
+import { connect } from 'react-redux'
 
 const Container = styled.div`
     position: absolute;
@@ -39,7 +41,7 @@ const List = styled.ul`
     }
 `
 
-const Menu = ({ menuToggled, showTaskMenu, showEditMenu, editMenu }) => {
+const Menu = ({ menuToggled, showTaskMenu, showEditMenu, editMenu, logout }) => {
 
     useEffect(() => {
         const el = document.querySelector('.menu-container');
@@ -55,11 +57,17 @@ const Menu = ({ menuToggled, showTaskMenu, showEditMenu, editMenu }) => {
                     <li><Link to="/calendar">Calendar</Link></li>
                     <li onClick={ () => showTaskMenu() }>New Task</li>
                     { editMenu ? <li onClick={ () => showEditMenu() }>Edit</li> : '' }
-                    <li><Link to="/logout">Logout</Link></li>
+                    <li onClick={ () => logout() }><Link to="/">Logout</Link></li>
                 </List>
             </ItemsContainer>
         </Container>
     )
 }
 
-export default Menu
+const mapDispatchToProps = dispatch => {
+    return {
+        logout: () => dispatch(logoutUser())
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Menu)

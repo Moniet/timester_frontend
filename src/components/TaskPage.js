@@ -59,7 +59,7 @@ const TaskPage = ({ match, tasks , token, loadUserData}) => {
         <Container>
             <Banner> 
                 <DateContainer>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="159" height="199" viewBox="0 0 159 199"><text transform="translate(1 158)" fill="rgba(255,255,255,0.13)" stroke="#fff" strokeWidth="1" fontSize="149" fontFamily="DroidSansMono, Droid Sans Mono" letterSpacing="-0.15em" opacity="0.958"><tspan x="0" y="0">{ dayNum }</tspan></text></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="199" viewBox="0 0 159 199"><text transform="translate(1 158)" fill="rgba(255,255,255,0.13)" stroke="#fff" strokeWidth="1" fontSize="149" fontFamily="DroidSansMono, Droid Sans Mono" letterSpacing="-0.08em" opacity="0.958"><tspan x="0" y="0">{ dayNum }</tspan></text></svg>
                     <MonthYear>{ readableMonth(date) } { date.getFullYear() }</MonthYear>
                 </DateContainer>
                 <BannerHeader className="banner-header">{ day }</BannerHeader>

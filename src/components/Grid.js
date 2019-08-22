@@ -20,7 +20,8 @@ const GridContainer = styled.div`
     ${mq[1]} {
         grid-template-columns: 1fr 1fr;
         grid-auto-rows: ${ gridSize.sm }px;
-        width: 90%;
+        width: 100%;
+        padding: 0 2rem;
     }
 `
 

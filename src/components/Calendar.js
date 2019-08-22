@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
@@ -58,13 +60,11 @@ const Day = styled.div`
     }
 `
 
-// render calendar based on the current month 
-// click on any of them to render the task page for that day
-
 const Calendar = ({ tasks, dispatch, loadUserData }) => {
     const date = new Date()
     const year = date.getFullYear()
     const month = date.getMonth()
+    const day = date.getDate()
     const daysNum = daysInMonth(month, year)
     let token = localStorage.getItem('token')
     const [menuToggled, toggleMenu] = useState(false)
@@ -77,6 +77,9 @@ const Calendar = ({ tasks, dispatch, loadUserData }) => {
 
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
     const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token))
+
+    // const taskDates = tasks.map(task => task.attributes.date)
+    // const highlightCurrentDate = (calDay, calMonth) => (calDay === currentDay && calMonth === month)
 
 
     const showMenu = () => {
@@ -102,13 +105,11 @@ const Calendar = ({ tasks, dispatch, loadUserData }) => {
             <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask }/>
             <Grid>
                 { Array(daysNum).fill('').map((n, i) => {
-                    return ( 
-
-                        <Day>
-                            <Link to={`/tasks/${year}-${formatTime(month+1)}-${formatTime(i+1)}`}>{ i + 1 }</Link>
-                        </Day>
-                       
-                    )
+                        return (
+                            <Day key={i} css={ css`${((i+1 === day) ?  'background:' + colors.tertiary + '; font-weight: bold;' : '')}` }>
+                                <Link to={`/tasks/${year}-${formatTime(month+1)}-${formatTime(i+1)}`}>{ i + 1 }</Link>
+                            </Day>
+                        )
                     } 
                 )}
             </Grid>

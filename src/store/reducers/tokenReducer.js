@@ -7,6 +7,11 @@ const tokenReducer = (state = initState, action) => {
                 ...state,
                 token: action.token
             }
+        case 'LOGOUT_USER':
+            return {
+                ...state,
+                token: 'false'
+            }
         default:
             return state
     }
