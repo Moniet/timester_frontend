@@ -80,7 +80,7 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
     const handleSubmit = () => {
         if (task.title && goals.length > 0) {
             submitTask(task, goals)
-            setTask({title: '', start_time: '', end_time: ''})
+            setTask({})
             setGoals([])
         }
     }

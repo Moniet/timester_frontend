@@ -39,10 +39,10 @@ const DateInput = ({ setValue, currentDate }) => {
     const [year, setYear] = useState(currentYear)
     const dateArr = currentDate ? currentDate.split('-') : [];
 
-    let days = Array(daysInMonth(month, currentYear)).fill('')
+    let days = Array(daysInMonth(month, currentYear)).fill('')    
     
     useEffect(() => {
-        setValue(`${year}-${month}-${day}`)
+        setValue(`${year}-${month}-${day}`);
     }, [day, month, year]);
 
     return (

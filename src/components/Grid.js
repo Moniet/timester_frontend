@@ -23,6 +23,13 @@ const GridContainer = styled.div`
         width: 100%;
         padding: 0 2rem;
     }
+
+    ${mq[2]} {
+        grid-template-columns: repeat(2, 1fr);
+        grid-auto-rows: ${ gridSize.lg }px;
+        width: 100%;
+        padding: 0 2rem;
+    }
 `
 
 const Grid = ({ children }) => {
