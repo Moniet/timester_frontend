@@ -1,6 +1,6 @@
 import api from '../adapters/api'
 
-const loadUserData= (tasks, goals) => {
+export const loadUserData = (tasks, goals) => {
     return { 
         type: 'LOAD_USER_DATA',
         goals,

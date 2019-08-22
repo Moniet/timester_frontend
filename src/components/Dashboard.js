@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
-import { userData } from '../actions/userDataActions'
+import { userData, loadUserData } from '../actions/userDataActions'
 import { colors, mq } from '../styles/theme'
 import api from '../adapters/api'
 
@@ -36,12 +36,12 @@ const BannerHeader = styled.h1`
   transform: translate(-50%, -50%);
 `
 
-const Dashboard = ({ loadUserData, token, tasks, goals }) => {
+const Dashboard = ({ getUserData, token, tasks, goals }) => {
     const [menuToggled, toggleMenu] = useState(false)
     const [taskMenuToggled, toggleTaskMenu] = useState(false)
 
     useEffect(() => {
-        loadUserData(token)
+        getUserData(token)
     }, [])
 
     const showMenu = () => {
@@ -54,7 +54,7 @@ const Dashboard = ({ loadUserData, token, tasks, goals }) => {
 
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
 
-    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token))
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(getUserData(token))
     
     return (
         <Container>
@@ -81,7 +81,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadUserData: token => dispatch(userData(token))
+        getUserData: token => dispatch(userData(token)),
+        getData: (tasks, goals) => dispatch(loadUserData(tasks, goals))
     }
 }
 

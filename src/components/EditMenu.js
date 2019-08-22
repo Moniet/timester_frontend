@@ -71,7 +71,7 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
         if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
         if (Object.keys(task).length === 0) setTask({...currentTask })
-        if (goals.length === 0 && currentGoals.length !== 0) setGoals(currentGoals.map((goal, i) => Object.assign(goal.attributes, {id: (i + 1)})));
+        if (goals.length === 0 && currentGoals.length !== 0) setGoals(currentGoals.map((goal, i) => Object.assign(goal.attributes, {id: goal.id})));
     }, [task, goals, goalNumber, menuToggled, currentTask, currentGoals])
 
     const newGoalItem = () => {
@@ -103,7 +103,7 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
 
                 { Array(goalNumber).fill('').map((n, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ (currentGoals.length + 1) + i } />) }
 
-                { currentGoals ? currentGoals.map((goal, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ i + 1 } goal={ goal.attributes } />) : '' }
+                { currentGoals ? currentGoals.map((goal, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ goal.id } goal={ goal.attributes } />) : '' }
 
                 <ButtonContainer>
                     <CreateButton onClick={ () => handleSubmit() }>Update Task</CreateButton>

@@ -57,8 +57,8 @@ const getTasks = (token) => {
  })
 }
 
-const editTask = (token, task, goals) => {
-  return fetch(`${baseUrl}/tasks`, {
+const editTask = (token, task, goals, id) => {
+  return fetch(`${baseUrl}/tasks/${id}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ const editTask = (token, task, goals) => {
         goals: goals
       }
     })
- })
+ }).then(res => res.json())
 }
 
 export default {

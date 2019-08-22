@@ -4,8 +4,8 @@ import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import styled from '@emotion/styled'
 import { colors, mq } from '../styles/theme'
-import { formatTime } from '../utils/dateUtils'
-import { userData } from '../actions/userDataActions'
+import { formatTime, formatToHours} from '../utils/dateUtils'
+import { userData, loadUserData } from '../actions/userDataActions'
 import { getCurrentTime } from '../utils/timeUtils'
 import api from '../adapters/api'
 import Container from './Container'
@@ -51,7 +51,7 @@ const positionMenu = css`
     margin-top: 4rem;
 `
 
-const GoalPage = ({ match, goals, tasks, loadUserData}) => {
+const GoalPage = ({ match, goals, tasks, loadData, getData}) => {
     let token = localStorage.getItem('token')
     let allGoals; 
     let river;
@@ -63,7 +63,10 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
     let task = {}; 
 
     if (goals) {
-        allGoals = goals.filter(goal => parseInt(goal.attributes.task_id) === parseInt(match.params.id))
+        let filteredGoals = goals.filter(goal => parseInt(goal.attributes.task_id) === parseInt(match.params.id))
+        allGoals = filteredGoals.sort(function (a,b) {
+            return formatToHours(b.start_time) - formatToHours(a.start_time)
+        })
     }
 
     if (tasks.length !== 0) {
@@ -71,7 +74,7 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
     }
     
     useEffect(() => {
-        if (goals.length === 0 && token !== 'false') loadUserData(localStorage.getItem('token'));
+        if (goals.length === 0 && token !== 'false') loadData(localStorage.getItem('token'));
         river = document.querySelector('#river-front')
     }, [goals, tasks, match])
 
@@ -88,12 +91,10 @@ const GoalPage = ({ match, goals, tasks, loadUserData}) => {
 
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
     const showEditMenu = () => toggleEditMenu(!editMenuToggled)
-    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadUserData(token));    
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadData(token));    
 
     const editCurrentTask = (newTask, newGoals) => {
-        // api.editTask(token, newTask, goals).then(loadUserData(token))
-        console.log(newTask)
-        console.log(newGoals)
+        api.editTask(token, newTask, newGoals, id).then(data => getData(data.tasks.data, data.goals.data))
     }
 
     const animateRiver = (duration, timeElapsed) => { // these values are in seconds 
@@ -131,7 +132,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadUserData: token => dispatch(userData(token))
+        loadData: token => dispatch(userData(token)),
+        getData: (tasks, goals) => dispatch(loadUserData(tasks, goals))
     }
 }
 
