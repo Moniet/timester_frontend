@@ -23,7 +23,7 @@ const ItemsContainer = styled.div`
     position: absolute;
     top: 50%;
     width: 90%;
-    margin: 22vw auto;
+    margin: 0vw auto;
 `
 
 const List = styled.ul`

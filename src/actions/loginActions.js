@@ -6,7 +6,8 @@ const login = user => {
         api.login(user)
             .then(data => {
                 dispatch(setToken(data.jwt))
-                localStorage.setItem('token', data.jwt)
+                if (data.jwt) localStorage.setItem('token', data.jwt);
+                if (!data.jwt) localStorage.setItem('token', 'false');
             })
     }
 }

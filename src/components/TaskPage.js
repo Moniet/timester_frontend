@@ -18,14 +18,24 @@ const DateContainer = styled.div`
     flex-direction: column; 
     align-items: center;
     margin-top: -2rem;
+
+    ${mq[0]} {
+        padding-top: 2rem;
+        height: 48%;
+    }
 `
 
-const MonthYear = styled.div`
+const MonthYear = styled.div` // displays month and year like so -- 
     color: white;
     letter-spacing: 5px;
     font-weight: 300;
     font-size: 0.75em;
     margin-top: -1.5rem;
+
+    ${mq[0]} {
+        margin-top: 0;
+        letter-spacing: 2px;
+    }
 `
 
 const Banner = styled.div`

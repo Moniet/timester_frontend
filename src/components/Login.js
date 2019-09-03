@@ -113,7 +113,7 @@ const Login = ({ login, register }) => {
            return ( 
                 <>
                     <label>Name</label> 
-                    <input type='text' data-type='name' onChange={(e) => handleUsernameChange(e)} /> 
+                    <input type='text' data-type='name' onChange={(e) => handleNameChange(e)} /> 
                 </>
             )
         }
