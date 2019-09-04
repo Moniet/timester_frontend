@@ -2,6 +2,7 @@
 import  { jsx, css, keyframes } from '@emotion/core'
 import React from 'react'
 import styled from '@emotion/styled'
+import { mq } from '../styles/theme'
 
 
 const Banner = styled.div`
@@ -17,6 +18,10 @@ const Banner = styled.div`
     display: grid;
     justify-content: center;
     align-items: center;
+
+    ${mq[4]} {
+      height: 5vw;
+    }
 `
 
 const fadeInOut = keyframes`

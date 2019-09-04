@@ -1,3 +1,5 @@
+/** @jsx jsx */
+import { jsx, css } from '@emotion/core'
 import React, { useState } from 'react'
 import styled from '@emotion/styled'
 import { colors, mq, styles } from '../styles/theme'
@@ -14,6 +16,10 @@ const Container = styled('div')`
     width: 100%;
     height: 100%;
     background: linear-gradient(to top, ${colors.primary}, ${colors.secondary}, ${colors.tertiary});
+
+    ${mq[3]} {
+        background: linear-gradient(to top right, ${colors.primary}, ${colors.secondary}, ${colors.tertiary});
+    }
 `
 
 const Form = styled('form')`
@@ -31,6 +37,20 @@ const Form = styled('form')`
     ${mq[1]} {
         width: 100%;
         height: 300px;
+    }
+
+    ${mq[3]} {
+        width: 40%;
+        height: 400px;
+        
+        input {
+            margin-bottom: 4rem;
+        }
+    }
+
+    ${mq[4]} {
+        width: 30%;
+        height: 400px;
     }
 
     label {
@@ -52,6 +72,10 @@ const Form = styled('form')`
         outline: none;
         background: rgba(255,255,255,0.25);
         box-shadow: ${styles.shadow};
+
+        ${mq[3]} {
+            margin-bottom: 4rem;
+        }
     }
 
     span {
@@ -75,6 +99,12 @@ const Button = styled('button')`
     cursor: pointer;
     ${mq[0]} {  width: 50%; }
     ${mq[1]} { width: 50%; }
+`
+
+const image = css`
+    ${mq[2]} {
+        display: none;
+    }
 `
 
 const Login = ({ login, register }) => {
@@ -122,7 +152,7 @@ const Login = ({ login, register }) => {
     return (
         <Container>
             <Greeting />
-            <img src={require('../assets/img/form-memphis-design-top.svg')} alt=""/>
+            <img src={require('../assets/img/form-memphis-design-top.svg')} css={image} alt=""/>
             <Form role="form" onSubmit={ handleSubmit }>
                 { nameInput() }
                 <label>Username</label>
@@ -134,7 +164,7 @@ const Login = ({ login, register }) => {
                 <span onClick={() => handleClick()}>Register</span>
                 <Button>{registerPage ? 'Register' : 'Login'}</Button>
             </Form>
-            <img src={require('../assets/img/form-memphis-design-bottom.svg')} alt="" />
+            <img src={require('../assets/img/form-memphis-design-bottom.svg')} css={image} alt="" />
         </Container>
     )
 }
