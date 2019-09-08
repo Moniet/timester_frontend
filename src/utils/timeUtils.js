@@ -1,4 +1,4 @@
-export const getCurrentTime = (setValue) => {
+export const getCurrentTime = () => {
     let date = new Date()
     let hour = date.getHours()
     let minutes = date.getMinutes()
@@ -28,3 +28,7 @@ export const getMinutes = (date) => {
     let newDate = new Date(date)
     return newDate.getMinutes()
 }
+
+// export const limitGoalRange = (startTime, endTime) => { // limits the current 
+
+// }
