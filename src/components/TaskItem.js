@@ -5,7 +5,7 @@ import styled from '@emotion/styled'
 import MenuInput from './MenuInput'
 import DateInput from './DateInput'
 import TimeInput from './TimeInput'
-import { getFormattedDate } from '../utils/timeUtils'
+import { getFormattedDate, formatToUTC } from '../utils/timeUtils'
 
 const MenuContainer = styled.div`
     position: relative;
@@ -51,12 +51,12 @@ const TaskItem = ({ task, setTask }) => {
 
             <Half>
                 <Label>Start Time</Label>
-                <TimeInput setValue={ start_time => setTask({...task, start_time}) } value={ taskExist ? task.start_time : '00:00' } />
+                <TimeInput setValue={ start_time => setTask({...task, start_time}) } value={ formatToUTC(task.start_time) } />
             </Half>
                 
             <Half>
                 <Label>End Time</Label>
-                <TimeInput setValue={ end_time => setTask({...task, end_time})} value={ taskExist ? task.end_time : '00:00' } />
+                <TimeInput setValue={ end_time => setTask({...task, end_time})} value={ formatToUTC(task.end_time) } />
             </Half>
 
             <Full>

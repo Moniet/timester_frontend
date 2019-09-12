@@ -1,3 +1,5 @@
+import { isFor } from "@babel/types"
+
 export const getCurrentTime = () => {
     let date = new Date()
     let hour = date.getHours()
@@ -29,12 +31,14 @@ export const getMinutes = (date) => {
     return newDate.getUTCMinutes()
 }
 
-export const formatGoalTime = (str) => {
+export const formatToUTC = (str) => {
+    const d = new Date(str)
+
     if (str) {
-        if (str.includes('000Z')) {
-            const d = new Date(str)
-            console.log(`${formatTime(d.getUTCHours())}:${formatTime(d.getUTCMinutes())}`)
-        };
+        if (str.includes('000Z')) return `${formatTime(d.getUTCHours())}:${formatTime(d.getUTCMinutes())}`;
+        return str;
+    } else {
+        return '00:00';
     }
 }
 
