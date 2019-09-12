@@ -56,11 +56,11 @@ const GoalPage = ({ match, goals, tasks, loadData, getData}) => {
     let allGoals; 
     let river;
     let time = getCurrentTime();
+    let id = match.params.id; 
+    let task = {};
     const [menuToggled, toggleMenu] = useState(false)
     const [taskMenuToggled, toggleTaskMenu] = useState(false)
     const [editMenuToggled, toggleEditMenu] = useState(false)
-    let id = match.params.id; 
-    let task = {}; 
 
     if (goals) {
         let filteredGoals = goals.filter(goal => parseInt(goal.attributes.task_id) === parseInt(match.params.id))

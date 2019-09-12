@@ -1,5 +1,3 @@
-import { isFor } from "@babel/types"
-
 export const getCurrentTime = () => {
     let date = new Date()
     let hour = date.getHours()

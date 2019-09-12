@@ -65,7 +65,6 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
     const [goalNumber, setGoalNum] = useState(0)
     const [task, setTask] = useState({})
     const [goals, setGoals] = useState([])
-    console.log(goals)
     
     useEffect(() => {
         const el = document.querySelector('.edit-menu-container');
