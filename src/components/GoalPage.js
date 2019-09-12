@@ -16,6 +16,7 @@ import TaskMenu from './TaskMenu';
 import EditMenu from './EditMenu';
 import GoalPageBanner from './GoalPageBanner'
 import { log } from 'util';
+import { create } from 'istanbul-reports'
 
 const Banner = styled.div`
     position: relative;
@@ -83,15 +84,15 @@ const GoalPage = ({ match, goals, tasks, loadData, getData}) => {
             toggleTaskMenu(!taskMenuToggled)
         } else if (editMenuToggled)  {
             toggleEditMenu(!editMenuToggled)
-        }
-        else {
+        } else {
             toggleMenu(!menuToggled)
         }
     }
 
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
     const showEditMenu = () => toggleEditMenu(!editMenuToggled)
-    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(loadData(token));    
+    const createTask = (task, goals) => api.createTasks(token, task, goals).then(loadData(token)); 
+    const createGoals = (goals) => api.createGoals(token, goals).then(loadData(token));
 
     const editCurrentTask = (newTask, newGoals) => {
         api.editTask(token, newTask, newGoals, id).then(data => getData(data.tasks.data, data.goals.data))
@@ -113,8 +114,8 @@ const GoalPage = ({ match, goals, tasks, loadData, getData}) => {
                 <MenuButton showMenu={ showMenu } menuToggled={ menuToggled } />
             </ButtonContainer>
             <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } showEditMenu={ showEditMenu } editMenu={ true } />
-            <TaskMenu css={ positionMenu } menuToggled={ taskMenuToggled } submitTask={ submitTask } />
-            <EditMenu css={ positionMenu } menuToggled={ editMenuToggled } submitTask={ editCurrentTask } currentTask={ task } currentGoals={ allGoals } />
+            <TaskMenu css={ positionMenu } menuToggled={ taskMenuToggled } submitTask={ createTask } />
+            <EditMenu css={ positionMenu } menuToggled={ editMenuToggled } submitTask={ editCurrentTask }  createGoals={ createGoals } currentTask={ task } currentGoals={ allGoals } />
             <Grid>
                 { allGoals ? allGoals.map((goal, i) => <Goal key={ i } goal={ goal } animateRiver={ animateRiver } />) : '' }
             </Grid>

@@ -75,10 +75,23 @@ const editTask = (token, task, goals, id) => {
  }).then(res => res.json())
 }
 
+const createGoals = (token, goals) => {
+  return fetch(`${baseUrl}/goals`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer ${token}`
+    },
+    body: JSON.stringify({ data: { goals } })
+  }).then(res => res.json())
+}
+
 export default {
     login,
     registerUser,
     getTasks,
     createTasks,
+    createGoals,
     editTask
 }

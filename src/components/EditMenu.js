@@ -61,8 +61,7 @@ const ButtonContainer = styled.div`
     cursor: pointer;
 `
 
-const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask }) => {
-    const [goalNumber, setGoalNum] = useState(0)
+const EditMenu = ({ token, menuToggled, createGoals, currentTask, currentGoals, submitTask }) => {
     const [task, setTask] = useState({})
     const [goals, setGoals] = useState([])
     
@@ -72,23 +71,32 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
         if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
         if (Object.keys(task).length === 0) setTask({ ...currentTask })
         if (goals.length === 0 && currentGoals.length !== 0) setGoals(currentGoals.map((goal, i) => Object.assign(goal.attributes, {id: goal.id})));
-    }, [task, goals, goalNumber, menuToggled, currentTask, currentGoals])
+    }, [task, goals, menuToggled, currentTask, currentGoals])
 
     const newGoalItem = () => {
         setGoals([
             ...goals, 
-            {
+            {   id: goals.length + 1,
                 title: '',
                 start_time: '00:00',
                 end_time: '00:00',
+                task_id: goals[0].task_id,
                 new_goal: true
             }
         ])
     }
+
+    console.log(currentTask)
     
     const handleSubmit = () => {
         if (task.title && goals.length > 0) {
-            submitTask(task, goals)
+            const newGoals = goals.filter(g => g.new_goal)
+            if (newGoals.length !== 0) createGoals(newGoals.map(g => { 
+                delete g.new_goal; 
+                return g; 
+            }))
+
+            submitTask(task, goals.filter(g => !g.new_goal))
             setTask({})
             setGoals([])
         }
@@ -100,8 +108,6 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
         if (!!goalExists) setGoals([...goals.filter(g => g.id !== goal.id), goal])
         if (!goalExists) setGoals([...goals, goal])
     }
-
-    console.log(goals);
     
 
     return (
