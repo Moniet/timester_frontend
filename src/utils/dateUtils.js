@@ -7,9 +7,9 @@ const formatTime = (time) => {
 }
 
 const formatToHours = date => {
-    const newDate = new Date(date)
-    const hours = newDate.getHours()
-    const minutes = newDate.getMinutes()
+    const d = new Date(date)
+    const hours = d.getUTCHours()
+    const minutes = d.getUTCMinutes()
 
     return `${formatTime(hours)}:${formatTime(minutes)}`
 }

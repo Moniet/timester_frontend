@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 import MenuInput from './MenuInput'
 import DateInput from './DateInput'
 import TimeInput from './TimeInput'
+import { getFormattedDate } from '../utils/timeUtils'
 
 const MenuContainer = styled.div`
     position: relative;
@@ -36,9 +37,10 @@ const textCenter = css`
 `
 
 const TaskItem = ({ task, setTask }) => {
-    
     const taskExist = (Object.keys(task).length > 1)
     if (task.start_time > task.end_time) setTask({ ...task, start_time: task.end_time  });
+
+    // console.log(task.start_time)
     
     return (
         <MenuContainer>
@@ -59,7 +61,7 @@ const TaskItem = ({ task, setTask }) => {
 
             <Full>
                 <Label>Date</Label>
-                <DateInput setValue={date => setTask({...task, date})} currentDate={ taskExist ? task.date : '' }/>
+                <DateInput setValue={date => setTask({...task, date})} currentDate={ taskExist ? task.date : getFormattedDate(new Date()) }/>
             </Full>
         </MenuContainer>
     )

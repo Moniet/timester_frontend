@@ -1,4 +1,5 @@
-const baseUrl = 'https://timester.herokuapp.com';
+// const baseUrl = 'https://timester.herokuapp.com';
+const baseUrl = 'http://localhost:3000';
 
 const login = (user) => {
     return fetch(`${baseUrl}/login`, {

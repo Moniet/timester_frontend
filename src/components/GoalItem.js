@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import MenuInput from './MenuInput'
 import TimeInput from './TimeInput'
 import { formatToHours } from '../utils/dateUtils'
+import { formatGoalTime } from '../utils/timeUtils'
 
 const MenuContainer = styled.div`
     position: relative;
@@ -29,8 +30,7 @@ const Label = styled.label`
     color: black;
 `
 
-
-const GoalItem = ({ setValue, goal, goalId }) => {
+const GoalItem = ({ setValue, goal, goalId, startTime, endTime }) => {
     const [currentGoal, setGoal] = useState({id: goalId, ...goal});    
 
     const updateGoal = (goal) => {
@@ -38,11 +38,13 @@ const GoalItem = ({ setValue, goal, goalId }) => {
         setValue(goal)
     }
 
+    formatGoalTime(currentGoal.start_time)
+
     return (
         <MenuContainer>
             <Full>
                 <Label>Goal Title</Label>
-                <MenuInput setValue={title => updateGoal({...currentGoal, title })} value={ currentGoal.title }/>
+                <MenuInput setValue={title => updateGoal({ ...currentGoal, title })} value={ currentGoal.title }/>
             </Full>
 
             <Half>

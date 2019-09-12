@@ -100,6 +100,14 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
             ])
         }
     }
+    
+    // console.log(goals)
+// const removeGoal = (goal) => {
+//     const goalExists = goals.find(g => g.id === goal.id)
+//     const index = goals.indexOf(g => goal.id === g.id)
+
+//     if (!!goalExists) setGoals([...goals.])
+// }
 
     return (
         <Container className="task-menu-container">
