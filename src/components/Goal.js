@@ -81,19 +81,11 @@ const Goal = ({ goal, animateRiver }) => {
     const currentTime =  new Date(Date.UTC(2000, 0, 1, hour, minutes))
     const startTime = new Date(goal.attributes.start_time)
     const endTime = new Date(goal.attributes.end_time)
-    // const startTime = Date.UTC(startDate.getUTCFullYear(), startDate.getUTCMonth(), startDate.getUTCDate(), startDate.getHours(), startDate.getMinutes())
-    // const endTime = Date.UTC(endDate.getUTCFullYear(), endDate.getUTCMonth(), endDate.getUTCDate(), endDate.getHours(), endDate.getMinutes())
     const duration = (endTime - startTime) / 1000 // converts ms to secs
     const timeElapsed = (currentTime - startTime) / 1000 
     const rowTemplate = (duration > 3600 ? '1fr 200px 1fr' : '1fr 100px 1fr')
     const hourBool = currentTime > startTime && currentTime < endTime
     const titleBackground = hourBool ? colors.primary : '#FFFDE4'
-
-    console.log(`
-        ST: ${ timeElapsed }
-        CM: ${ currentTime }
-        bool: ${ hourBool }
-    `)
 
     if (hourBool) animateRiver(duration, timeElapsed);    
 

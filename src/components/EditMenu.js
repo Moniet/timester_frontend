@@ -75,7 +75,15 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
     }, [task, goals, goalNumber, menuToggled, currentTask, currentGoals])
 
     const newGoalItem = () => {
-        setGoalNum(goalNumber + 1)
+        setGoals([
+            ...goals, 
+            {
+                title: '',
+                start_time: '00:00',
+                end_time: '00:00',
+                new_goal: true
+            }
+        ])
     }
     
     const handleSubmit = () => {
@@ -93,6 +101,9 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
         if (!goalExists) setGoals([...goals, goal])
     }
 
+    console.log(goals);
+    
+
     return (
         <Container className="edit-menu-container">
             <ItemsContainer>
@@ -101,9 +112,7 @@ const EditMenu = ({ token, menuToggled, currentTask, currentGoals, submitTask })
                     <AddGoalButton onClick={ () => newGoalItem()}>Add Goal</AddGoalButton>
                 </ButtonContainer>
 
-                { Array(goalNumber).fill('').map((n, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ (currentGoals.length + 1) + i } />) }
-
-                { currentGoals ? currentGoals.map((goal, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ goal.id } goal={ goal.attributes } />) : '' }
+                { goals.length !== 0 ? goals.map((goal, i) => <GoalItem setValue={ addGoal } key={ i } goalId={ goal.id } goal={ goal } />) : '' }
 
                 <ButtonContainer>
                     <CreateButton onClick={ () => handleSubmit() }>Update Task</CreateButton>
