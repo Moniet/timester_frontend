@@ -13,7 +13,7 @@ const Button = styled.button`
     border: none;
     border-radius: 50%;
     position: absolute;
-    top: calc(40% + 2.5vh);
+    top: calc(40% + 7vh);
     left: 50%;
     transform: translate(-50%, -3.5rem);
     outline: none;

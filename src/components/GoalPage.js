@@ -113,7 +113,7 @@ const GoalPage = ({ match, goals, tasks, loadData, getData}) => {
             <ButtonContainer>
                 <MenuButton showMenu={ showMenu } menuToggled={ menuToggled } />
             </ButtonContainer>
-            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } showEditMenu={ showEditMenu } editMenu={ true } />
+            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } showEditMenu={ showEditMenu } editMenu={ true } scrollPercent={75}/>
             <TaskMenu css={ positionMenu } menuToggled={ taskMenuToggled } submitTask={ createTask } />
             <EditMenu css={ positionMenu } menuToggled={ editMenuToggled } submitTask={ editCurrentTask }  createGoals={ createGoals } currentTask={ task } currentGoals={ allGoals } />
             <Grid>

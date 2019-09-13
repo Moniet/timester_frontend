@@ -8,20 +8,19 @@ import { connect } from 'react-redux'
 const Container = styled.div`
     position: absolute;
     width: 100vw;
-    height: 100vh;
+    height: 70vh;
     background: white;
     overflow-y: scroll;
     z-index: 500;
     top: 0;
     display: flex;
     justify-content: center;
+    align-items: center;
     opacity: 0;
-    transform: translateY(-100%);
 `
 
 const ItemsContainer = styled.div`
     position: absolute;
-    top: 50%;
     width: 90%;
     margin: 0vw auto;
 `
@@ -41,11 +40,11 @@ const List = styled.ul`
     }
 `
 
-const Menu = ({ menuToggled, showTaskMenu, showEditMenu, editMenu, logout }) => {
+const Menu = ({ menuToggled, showTaskMenu, showEditMenu, editMenu, logout, scrollPercent }) => {
 
     useEffect(() => {
         const el = document.querySelector('.menu-container');
-        if (menuToggled) TweenLite.to(el, 1, {yPercent: 115, opacity: 1});
+        if (menuToggled) TweenLite.to(el, 1, {yPercent: scrollPercent, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {yPercent: -100, opacity: 0});
     }, [menuToggled])
 

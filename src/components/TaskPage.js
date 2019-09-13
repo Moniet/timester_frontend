@@ -100,7 +100,7 @@ const TaskPage = ({ match, tasks, token, getUserData }) => {
             <MenuButtonContainer>
                 <MenuButton showMenu={ showMenu } menuToggled={ menuToggled }/>
             </MenuButtonContainer>
-            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu }/>
+            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } scrollPercent={50}/>
             <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask }/>
             <Grid>
                 { tasks.filter(task => task.attributes.date === match.params.date).map((task, i) => <Task task={ task } key={i} />) }

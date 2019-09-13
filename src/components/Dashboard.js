@@ -26,7 +26,7 @@ const Banner = styled.div`
 
 const BannerContainer = styled.div`
     width: 100%;
-    height: 45%;
+    height: 50%;
 `
 
 const BannerHeader = styled.h1`
@@ -63,7 +63,7 @@ const Dashboard = ({ getUserData, getData, token, tasks, goals }) => {
                 </Banner>
                 <MenuButton showMenu={ showMenu } menuToggled={ menuToggled }/>
             </BannerContainer>
-            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu }/>
+            <Menu menuToggled={ menuToggled } showTaskMenu={ showTaskMenu } scrollPercent={50} />
             { tasks.length > 0 ? <TaskGrid tasks={ tasks } /> : <DashboardMessage message="CLICK THE MENU TO CREATE TASKS" />}
             <TaskMenu menuToggled={ taskMenuToggled } submitTask={ submitTask }/>
         </Container>

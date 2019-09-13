@@ -69,7 +69,7 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
     
     useEffect(() => {
         const el = document.querySelector('.task-menu-container');
-        if (menuToggled) TweenLite.to(el, 1, {yPercent: 110, opacity: 1});
+        if (menuToggled) TweenLite.to(el, 1, {yPercent: 100, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {yPercent: -100, opacity: 0});
     }, [task, goals, goalNumber, menuToggled])
 
