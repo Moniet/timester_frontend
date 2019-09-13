@@ -13,6 +13,7 @@ const Container = styled.div`
     position: absolute;
     width: 100vw;
     height: 100vh;
+    padding-bottom: 10%;
     background: white;
     overflow-y: scroll;
     z-index: 500;
@@ -69,7 +70,7 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
     
     useEffect(() => {
         const el = document.querySelector('.task-menu-container');
-        if (menuToggled) TweenLite.to(el, 1, {yPercent: 100, opacity: 1});
+        if (menuToggled) TweenLite.to(el, 1, {yPercent: 105, opacity: 1});
         if (!menuToggled) TweenLite.to(el, 1, {yPercent: -100, opacity: 0});
     }, [task, goals, goalNumber, menuToggled])
 
