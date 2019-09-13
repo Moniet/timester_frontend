@@ -62,7 +62,7 @@ const MenuButtonContainer = styled.div`
     }
 `
 
-const TaskPage = ({ match, tasks , token, getUserData, getData}) => {
+const TaskPage = ({ match, tasks, token, getUserData }) => {
     const [menuToggled, toggleMenu] = useState(false)
     const [taskMenuToggled, toggleTaskMenu] = useState(false)
     const date = new Date(match.params.date)
@@ -86,7 +86,7 @@ const TaskPage = ({ match, tasks , token, getUserData, getData}) => {
     }
 
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
-    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(console.log)
+    const submitTask = (task, goals) => api.createTasks(token, task, goals).then(getUserData(token))
 
     return (
         <Container >
@@ -114,14 +114,13 @@ const mapStateToProps = (state) => {
     const { token } = state
     return {
         tasks,
-        token
+        token: token.token
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         getUserData: token => dispatch(userData(token)),
-        getData: (tasks, goals) => dispatch(loadUserData(tasks, goals))
     }
 }
 

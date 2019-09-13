@@ -92,7 +92,7 @@ const GoalPage = ({ match, goals, tasks, loadData, getData}) => {
     const showTaskMenu = () => toggleTaskMenu(!taskMenuToggled)
     const showEditMenu = () => toggleEditMenu(!editMenuToggled)
     const createTask = (task, goals) => api.createTasks(token, task, goals).then(loadData(token)); 
-    const createGoals = (goals) => api.createGoals(token, goals).then(loadData(token));
+    const createGoals = (goals) => api.createGoals(token, goals);
 
     const editCurrentTask = (newTask, newGoals) => {
         api.editTask(token, newTask, newGoals, id).then(data => getData(data.tasks.data, data.goals.data))

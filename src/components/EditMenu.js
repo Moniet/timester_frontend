@@ -67,8 +67,8 @@ const EditMenu = ({ token, menuToggled, createGoals, currentTask, currentGoals, 
     
     useEffect(() => {
         const el = document.querySelector('.edit-menu-container');
-        if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
-        if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
+        if (menuToggled) TweenLite.to(el, 1, {yPercent: 110, opacity: 1});
+        if (!menuToggled) TweenLite.to(el, 1, {yPercent: -100, opacity: 0});
         if (Object.keys(task).length === 0) setTask({ ...currentTask })
         if (goals.length === 0 && currentGoals.length !== 0) setGoals(currentGoals.map((goal, i) => Object.assign(goal.attributes, {id: goal.id})));
     }, [task, goals, menuToggled, currentTask, currentGoals])
@@ -85,16 +85,15 @@ const EditMenu = ({ token, menuToggled, createGoals, currentTask, currentGoals, 
             }
         ])
     }
-
-    console.log(currentTask)
     
     const handleSubmit = () => {
         if (task.title && goals.length > 0) {
             const newGoals = goals.filter(g => g.new_goal)
-            if (newGoals.length !== 0) createGoals(newGoals.map(g => { 
-                delete g.new_goal; 
-                return g; 
-            }))
+            if (newGoals.length !== 0) 
+                createGoals(newGoals.map(g => { 
+                    delete g.new_goal; 
+                    return g; 
+                }))
 
             submitTask(task, goals.filter(g => !g.new_goal))
             setTask({})

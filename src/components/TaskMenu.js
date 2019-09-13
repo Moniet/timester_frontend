@@ -69,8 +69,8 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
     
     useEffect(() => {
         const el = document.querySelector('.task-menu-container');
-        if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
-        if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
+        if (menuToggled) TweenLite.to(el, 1, {yPercent: 110, opacity: 1});
+        if (!menuToggled) TweenLite.to(el, 1, {yPercent: -100, opacity: 0});
     }, [task, goals, goalNumber, menuToggled])
 
     const newGoalItem = () => {
@@ -100,14 +100,6 @@ const TaskMenu = ({ token, getTasks, menuToggled, submitTask }) => {
             ])
         }
     }
-    
-    // console.log(goals)
-// const removeGoal = (goal) => {
-//     const goalExists = goals.find(g => g.id === goal.id)
-//     const index = goals.indexOf(g => goal.id === g.id)
-
-//     if (!!goalExists) setGoals([...goals.])
-// }
 
     return (
         <Container className="task-menu-container">

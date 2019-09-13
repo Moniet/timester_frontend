@@ -39,8 +39,6 @@ const textCenter = css`
 const TaskItem = ({ task, setTask }) => {
     const taskExist = (Object.keys(task).length > 1)
     if (task.start_time > task.end_time) setTask({ ...task, start_time: task.end_time  });
-
-    // console.log(task.start_time)
     
     return (
         <MenuContainer>

@@ -45,8 +45,8 @@ const Menu = ({ menuToggled, showTaskMenu, showEditMenu, editMenu, logout }) => 
 
     useEffect(() => {
         const el = document.querySelector('.menu-container');
-        if (menuToggled) TweenLite.to(el, 1, {y: 0, opacity: 1});
-        if (!menuToggled) TweenLite.to(el, 1, {y: -1000, opacity: 0});
+        if (menuToggled) TweenLite.to(el, 1, {yPercent: 115, opacity: 1});
+        if (!menuToggled) TweenLite.to(el, 1, {yPercent: -100, opacity: 0});
     }, [menuToggled])
 
     return (
