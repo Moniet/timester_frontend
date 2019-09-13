@@ -10,6 +10,9 @@ const input = css`
     padding: 1rem 0.5rem 0.5rem 0;
     margin: 0.25rem 0 2rem 0;
     outline: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
 `
 
 const MenuInput = ({ setValue, value }) => {
